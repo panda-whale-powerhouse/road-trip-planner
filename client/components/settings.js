@@ -1,41 +1,61 @@
-import React, {useState, useEffect} from 'react';
-
+import React from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import {
+  updateDestination,
+  updateOrigin,
+  updateStep,
+} from '../features/genSettings/genSettingsSlice';
 
 const Settings = () => {
-    return (
-        <div>
-            
-            <form>
-                <label htmlFor='from'>From:</label>
-                <input id='from' type='text'></input>
+  const origin = useSelector((state) => state.origin);
+  const destination = useSelector((state) => state.destination);
+  const step = useSelector((state) => state.step);
+  const dispatch = useDispatch();
 
-                <label htmlFor='to'>To:</label>
-                <input id='to' type='text'></input>
+  return (
+    <div>
+      <form>
+        <label htmlFor='from'>From:</label>
+        <input
+          id='from'
+          type='text'
+          value={origin}
+          onChange={(e) => dispatch(updateOrigin(e.target.value))}
+        ></input>
 
-                <label htmlFor='stops'>Stops:</label>
-                <input id='stops' type='text'></input>
-            </form>
+        <label htmlFor='to'>To:</label>
+        <input
+          id='to'
+          type='text'
+          value={destination}
+          onChange={(e) => dispatch(updateDestination(e.target.value))}
+        ></input>
 
-            <form>
-                <label htmlFor='from'>Chunk Trip By:</label>
-                <select name='milesTime'>
-                    <option>Select One</option>
-                    <option>Miles</option>
-                    <option>Duration</option>
-                </select>
-            </form>
+        <label htmlFor='stops'>Stops:</label>
+        <input
+          id='stops'
+          type='text'
+          value={step}
+          onChange={(e) => dispatch(updateStep(e.target.value))}
+        ></input>
+      </form>
 
+      <form>
+        <label htmlFor='from'>Chunk Trip By:</label>
+        <select name='milesTime'>
+          <option>Select One</option>
+          <option>Miles</option>
+          <option>Duration</option>
+        </select>
+      </form>
+    </div>
+  );
+};
 
+const styles = {
+  chunkOptions: {
+    margin: '30px',
+  },
+};
 
-
-        </div>
-    )
-}
-
-const styles = { 
-    chunkOptions: {
-        margin: '30px'
-    }
-}
-
-export default Settings
+export default Settings;
