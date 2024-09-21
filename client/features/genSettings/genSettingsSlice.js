@@ -9,8 +9,21 @@ const initialState = {
 export const genSettingsSlice = createSlice({
   name: 'genSettings',
   initialState,
-  reducers: {},
+  reducers: {
+    updateOrigin: (state, newOrigin) => {
+      state.origin = newOrigin.payload;
+    },
+
+    updateDestination: (state, newDestination) => {
+      state.destination = newDestination.payload;
+    },
+
+    updateStep: (state, newStep) => {
+      state.step = newStep.payload;
+    },
+  },
 });
 
-export const {} = genSettingsSlice.actions;
+export const { updateDestination, updateOrigin, updateStep } =
+  genSettingsSlice.actions;
 export default genSettingsSlice.reducer;
