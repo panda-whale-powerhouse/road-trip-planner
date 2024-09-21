@@ -1,8 +1,8 @@
 import { createSlice } from '@reduxjs/toolkit';
 
 const initialState = {
-  destination: '',
-  origin: '',
+  destination: 'Los Angeles',
+  origin: 'New York',
   step: '',
 };
 

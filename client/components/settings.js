@@ -7,9 +7,9 @@ import {
 } from '../features/genSettings/genSettingsSlice';
 
 const Settings = () => {
-  const origin = useSelector((state) => state.origin);
-  const destination = useSelector((state) => state.destination);
-  const step = useSelector((state) => state.step);
+  const origin = useSelector((state) => state.genSettings.origin);
+  const destination = useSelector((state) => state.genSettings.destination);
+  const step = useSelector((state) => state.genSettings.step);
   const dispatch = useDispatch();
 
   return (
