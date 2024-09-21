@@ -13,8 +13,8 @@ const Settings = () => {
   const dispatch = useDispatch();
 
   return (
-    <div>
-      <form>
+    <div style={styles.settings}>
+      <form style={styles.top}>
         <label htmlFor='from'>From:</label>
         <input
           id='from'
@@ -40,7 +40,7 @@ const Settings = () => {
         ></input>
       </form>
 
-      <form>
+      <form style={styles.bottom}>
         <label htmlFor='from'>Chunk Trip By:</label>
         <select name='milesTime'>
           <option>Select One</option>
@@ -53,8 +53,19 @@ const Settings = () => {
 };
 
 const styles = {
-  chunkOptions: {
-    margin: '30px',
+  settings: {
+    display: 'flex',
+    justifyContent: 'space-evenly',
+    alignItems: 'flex-start',
+    flexDirection: 'column',
+  },
+  top: {
+    display: 'flex',
+    gap: '5px',
+  },
+  bottom: {
+    display: 'flex',
+    gap: '5px',
   },
 };
 
