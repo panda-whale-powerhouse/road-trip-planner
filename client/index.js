@@ -1,25 +1,22 @@
 // console.log("its working");
 
-import React, {useState, useEffect} from 'react';
-import {createRoot} from 'react-dom/client';
-import SavedTrips from './savedTrips'
-import Settings from './settings'
-import Map from './map'
+import React, { useState, useEffect } from 'react';
+import { createRoot } from 'react-dom/client';
+import SavedTrips from './components/savedTrips';
+import Settings from './components/settings';
+import Map from './components/map';
 
 const App = () => {
   return (
     <div>
-      
       <SavedTrips />
-      
+
       <Settings />
 
       <Map />
-
     </div>
-  )
-}
-
+  );
+};
 
 // const styles = {
 //   body: {
@@ -28,7 +25,5 @@ const App = () => {
 //   }
 // }
 
-
-const root = createRoot(document.getElementById('app'))
-root.render(<App />)
-
+const root = createRoot(document.getElementById('app'));
+root.render(<App />);
