@@ -14,10 +14,13 @@ export const genSettingsSlice = createSlice({
       state.origin = newOrigin.payload;
     },
 
-    updateDestination: (state, newDestination) =>
-      (state.destination = newDestination.payload),
+    updateDestination: (state, newDestination) => {
+      state.destination = newDestination.payload;
+    },
 
-    updateStep: (state, newstep) => (state.step = newStep.payload),
+    updateStep: (state, newStep) => {
+      state.step = newStep.payload;
+    },
   },
 });
 
