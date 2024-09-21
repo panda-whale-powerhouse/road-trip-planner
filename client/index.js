@@ -1,12 +1,43 @@
+// console.log("its working");
 
-console.log("its working");
+import React, { useState, useEffect } from 'react';
+import { createRoot } from 'react-dom/client';
+import { Provider } from 'react-redux';
 
-const map = document.createElement('iframe')
-map.setAttribute('loading', 'lazy');
-map.setAttribute('allowFullScreen', "");
-map.setAttribute('width', '600px');
-map.setAttribute('height', '500px')
-map.setAttribute('src', `https://www.google.com/maps/embed/v1/directions?key=&origin=Space+Needle,Seattle+WA&destination=Middletown+Delaware"`)
-document.querySelector('body').appendChild(
-  map
-)
+import SavedTrips from './components/savedTrips';
+import Settings from './components/settings';
+import Map from './components/map';
+import { store } from './app/store';
+
+const App = () => {
+  return (
+    <div style={styles.body}>
+      <SavedTrips />
+
+      <div style={styles.settingMap}>
+       <Settings />
+        <Map />
+      </div>
+    </div>
+  );
+};
+
+const styles = {
+  body: {
+    display: 'flex',
+    justifyContent: 'flex-start',
+  },
+  settingMap: {
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
+    margin: '50px'
+  }
+}
+
+const root = createRoot(document.getElementById('app'));
+root.render(
+  <Provider store={store}>
+    <App />
+  </Provider>
+);
