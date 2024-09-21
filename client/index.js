@@ -1,12 +1,34 @@
+// console.log("its working");
 
-console.log("its working");
+import React, {useState, useEffect} from 'react';
+import {createRoot} from 'react-dom/client';
+import SavedTrips from './savedTrips'
+import Settings from './settings'
+import Map from './map'
 
-const map = document.createElement('iframe')
-map.setAttribute('loading', 'lazy');
-map.setAttribute('allowFullScreen', "");
-map.setAttribute('width', '600px');
-map.setAttribute('height', '500px')
-map.setAttribute('src', `https://www.google.com/maps/embed/v1/directions?key=&origin=Space+Needle,Seattle+WA&destination=Middletown+Delaware"`)
-document.querySelector('body').appendChild(
-  map
-)
+const App = () => {
+  return (
+    <div>
+      
+      <SavedTrips />
+      
+      <Settings />
+
+      <Map />
+
+    </div>
+  )
+}
+
+
+// const styles = {
+//   body: {
+//     display: 'flex',
+//     justifyContent: 'space-evenly'
+//   }
+// }
+
+
+const root = createRoot(document.getElementById('app'))
+root.render(<App />)
+
