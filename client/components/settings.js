@@ -47,6 +47,7 @@ const Settings = () => {
           <option>Miles</option>
           <option>Duration</option>
         </select>
+        <a href='/corsproxy/TEST'>CORSPROXY TEST</a>
       </form>
     </div>
   );

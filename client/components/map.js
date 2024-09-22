@@ -25,7 +25,7 @@ const Map = () => {
   useEffect(() => {
     function getData() {
       fetch(
-        `/corsproxy/https://maps.googleapis.com/maps/api/directions/json?key=AIzaSyBgxv1mUqaMXN3hkGTaXLN1X3Lhc87pLN4&destination=New+York&origin=Los+Angeles`,
+        `/corsproxy/directions?url=https://maps.googleapis.com/maps/api/directions/json&key=AIzaSyBgxv1mUqaMXN3hkGTaXLN1X3Lhc87pLN4&destination=New+York&origin=Los+Angeles`,
         {
           method: 'GET',
           mode: 'cors',
@@ -35,7 +35,7 @@ const Map = () => {
         }
       )
         .then((response) => response.text())
-        .then((data) => console.log(data, data === ''))
+        .then((data) => console.log(data))
         .catch((error) => console.log(error));
     }
     getData();

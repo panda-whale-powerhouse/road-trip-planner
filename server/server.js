@@ -1,17 +1,20 @@
 const express = require('express');
-const app = express();
-require('dotenv').config();
-const path = require('path');
-const port = 8086;
-const userController = require('./controllers/userController');
 const mongoose = require('mongoose');
-const mongoURI = process.env.MONGO_URI;
+require('dotenv').config();
+
+const app = express();
+const userController = require('./controllers/userController');
+
+const PORT = 3000;
+const MONGO_URI = process.env.MONGO_URI;
+
 mongoose
-  .connect(mongoURI)
-  .then(() => console.log(`Connected to MongoDB at ${mongoURI}`))
+  .connect(MONGO_URI)
+  .then(() => console.log(`Connected to MongoDB at ${MONGO_URI}`))
   .catch((err) => console.error('Failed to connect to MongoDB', err));
+
 app.use(express.json());
-// app.use(express.static(path.resolve(__dirname, '../../frontend/vite-app/dist/')));
+
 app.post('/login', userController.verifyUser, (req, res) => {
   res.status(200).json({
     success: true,
@@ -19,6 +22,7 @@ app.post('/login', userController.verifyUser, (req, res) => {
     data: res.locals.currentUser,
   });
 });
+
 app.post('/signup', userController.createUser, (req, res) => {
   res.status(200).json({
     success: true,
@@ -28,14 +32,26 @@ app.post('/signup', userController.createUser, (req, res) => {
 });
 
 // used to try to get around broswer's cross origin issues on frontend
+// only seems to work with :param syntax?
 app.get('/corsproxy/:url', async (req, res, next) => {
   try {
-    const response = await fetch(req.params.url);
+    console.log(req.params.url);
+    // TODO: should be refactored to do this more dynamically
+    const fetch_url = `${req.query.url}?key=${
+      req.query.key
+    }&origin=${req.query.origin.replace(
+      ' ',
+      '+'
+    )}&destination=${req.query.destination.replace(' ', '+')}`;
+
+    const response = await fetch(fetch_url);
     const data = await response.json();
     return res
       .status(200)
-      .setHeader('Access-Control-Allow-Origin', '*')
+      .setHeader('Access-Control-Allow-Origin', '*') // all this is to set this header on the response to the browser
       .json(data);
+
+    //
   } catch (error) {
     return next({
       success: false,
@@ -58,6 +74,7 @@ app.use((err, req, res, next) => {
     message: 'An error occurred',
   };
   const errorObj = Object.assign({}, defaultErr, err);
+
   console.log(errorObj.log);
   return res.status(errorObj.status).json({
     success: errorObj.success,
@@ -65,6 +82,6 @@ app.use((err, req, res, next) => {
   });
 });
 
-app.listen(port, () => {
-  console.log(`Server is running on http://localhost:${port}`);
+app.listen(PORT, () => {
+  console.log(`Server is running on http://localhost:${PORT}`);
 });
