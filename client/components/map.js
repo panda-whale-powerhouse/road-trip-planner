@@ -25,8 +25,8 @@ const Map = () => {
 
 const styles = {
   map: {
-    width: '600',
-    height: '450',
+    width: '670',
+    height: '420',
   },
 };
 

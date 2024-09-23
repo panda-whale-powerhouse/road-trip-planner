@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState, useRef} from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import {
   updateDestination,
@@ -6,12 +6,28 @@ import {
   updateStep,
   updateWaypoints
 } from '../features/genSettings/genSettingsSlice';
+import WaypointContainer from './waypointList';
 
 const Settings = () => {
   const origin = useSelector((state) => state.genSettings.origin);
   const destination = useSelector((state) => state.genSettings.destination);
   const step = useSelector((state) => state.genSettings.step);
   const dispatch = useDispatch();
+  const waypoints = useSelector((state)=> state.genSettings.waypoints)
+
+  const inputRef = useRef(null);
+
+  function handleChunk(e) {
+    e.preventDefault();
+
+    const form = e.target;
+    const formData = new FormData(form);
+    const formJson = Object.fromEntries(formData.entries());
+
+    dispatch(updateWaypoints([...waypoints, formJson.waypoints]));
+
+    inputRef.current.value= '';
+  }
 
   function chunkRoute () {
     async function getData() {
@@ -57,42 +73,44 @@ const Settings = () => {
 
 
   return (
-    <div style={styles.settings}>
-      <form style={styles.top}>
-        <label htmlFor='from'>From:</label>
-        <input
-          id='from'
-          type='text'
-          value={origin}
-          onChange={(e) => dispatch(updateOrigin(e.target.value))}
-        ></input>
+    <div>
+      <div style={styles.settings}>
+        <form style={styles.top}>
+          <label htmlFor='from'>From:</label>
+          <input
+            id='from'
+            type='text'
+            value={origin}
+            onChange={(e) => dispatch(updateOrigin(e.target.value))}
+          ></input>
 
-        <label htmlFor='to'>To:</label>
-        <input
-          id='to'
-          type='text'
-          value={destination}
-          onChange={(e) => dispatch(updateDestination(e.target.value))}
-        ></input>
+          <label htmlFor='to'>To:</label>
+          <input
+            id='to'
+            type='text'
+            value={destination}
+            onChange={(e) => dispatch(updateDestination(e.target.value))}
+          ></input>
+        </form>
 
-        <label htmlFor='steps'>Step:</label>
-        <input
-          id='steps'
-          type='number'
-          value={step}
-          onChange={(e) => dispatch(updateStep(e.target.value))}
-        ></input>
-      </form>
+        <form style= {styles.bottom}>
+          <label htmlFor='steps'>Chunk Trip By Miles:</label>
+          <input
+            id='steps'
+            type='number'
+            value={step}
+            onChange={(e) => dispatch(updateStep(e.target.value))}
+          ></input>
+            <button onClick={(e) => {e.preventDefault();chunkRoute()}}>Find Stops</button>
+        </form> 
 
-      <form style={styles.bottom}>
-        {/* <label htmlFor='from'>Chunk Trip By:</label>
-        <select name='milesTime'>
-          <option>Select One</option>
-          <option>Miles</option>
-          <option>Duration</option>
-        </select> */}
-        <button onClick={(e) => {e.preventDefault();chunkRoute()}}>Find Stops</button>
-      </form>
+        <form style={styles.bottom} onSubmit= {handleChunk}>
+          <label htmlFor='waypoints'>Stops You Want to Make:</label>
+          <input type='text' ref = {inputRef} id= 'waypoints' name='waypoints'></input>
+          <button style= {styles.addWaypoint} type='submit'>Add</button>
+        </form>
+      </div>
+      <WaypointContainer />
     </div>
   );
 };
@@ -103,6 +121,7 @@ const styles = {
     justifyContent: 'space-evenly',
     alignItems: 'flex-start',
     flexDirection: 'column',
+    position: 'relative'
   },
   top: {
     display: 'flex',
@@ -111,7 +130,7 @@ const styles = {
   bottom: {
     display: 'flex',
     gap: '5px',
-  },
+  }
 };
 
 export default Settings;
