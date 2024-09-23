@@ -1,9 +1,11 @@
-// console.log("its working");
-
 import React, { useState, useEffect } from 'react';
 import { createRoot } from 'react-dom/client';
 import { Provider } from 'react-redux';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 
+
+import LoginForm from './components/LoginForm.jsx';
+import SignUpForm from './components/SignUpForm.jsx';
 import SavedTrips from './components/savedTrips';
 import Settings from './components/settings';
 import Map from './components/map';
@@ -11,14 +13,21 @@ import { store } from './app/store';
 
 const App = () => {
   return (
-    <div style={styles.body}>
-      <SavedTrips />
+    // <div style={styles.body}>
+    //   <SavedTrips />
 
-      <div style={styles.settingMap}>
-       <Settings />
-        <Map />
-      </div>
-    </div>
+    //   <div style={styles.settingMap}>
+    //    <Settings />
+    //     <Map />
+    //   </div>
+    // </div>
+    <Router>
+      <Routes>
+        <Route path = "/" element={<LoginForm/>}/>
+        <Route path = "/signup" element={<SignUpForm/>}/>
+        <Route path = "/mainPage" element={<Map/>}/>
+      </Routes>
+    </Router>
   );
 };
 
