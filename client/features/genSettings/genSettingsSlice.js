@@ -25,7 +25,7 @@ export const genSettingsSlice = createSlice({
     },
 
     updateWaypoints: (state, action) => {
-      state.waypoints = state.waypoints.concat(action.payload);
+      state.waypoints = action.payload;
       state.waypointStr = state.waypoints
         .slice(0, 11)
         .reduce((str, waypoint) => str + waypoint + "|", "&waypoints=")
@@ -34,6 +34,10 @@ export const genSettingsSlice = createSlice({
 
     addWaypoint: (state, action) => {
       state.waypoints.push(action.payload);
+      state.waypointStr = state.waypoints
+        .slice(0, 11)
+        .reduce((str, waypoint) => str + waypoint + "|", "&waypoints=")
+        .slice(0, -1);
     },
   },
 });
