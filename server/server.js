@@ -15,14 +15,12 @@ app.post('/login', userController.verifyUser, (req, res) => {
   res.status(200).json({
     success: true, 
     message: 'successfully login',
-    data: res.locals.currentUser
   });
 });
 app.post('/signup', userController.createUser, (req, res) => {
   res.status(200).json({
     success: true, 
     message: 'successfully signed up',
-    data: res.locals.user
   });
 });
 
