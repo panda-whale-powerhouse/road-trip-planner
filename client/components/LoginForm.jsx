@@ -8,10 +8,15 @@ const LoginForm = () => {
   const [fieldsFilled, setFieldsFilled] = useState(true);
   const [errorMsgShow, setErrorMsgShow] = useState(false);
   const navigate = useNavigate();
-  const handleLogin = (formData) => {
+  const handleLogin = (e) => {
     setIsPwdWrong(false);
     setFieldsFilled(true);
     setErrorMsgShow(false);
+    e.preventDefault();
+    const formData = {
+      username,
+      password
+    }
     fetch('/login', {
       method: 'POST',
       headers: {
@@ -23,7 +28,7 @@ const LoginForm = () => {
       .then((data) => {
         console.log(data, 'success logged in');
         if (data.success) {
-          navigate('/mainpage');
+          navigate('/mainPage');
         } else {
           if (data.message === 'incorrect information') {
             setIsPwdWrong(true);
@@ -36,7 +41,7 @@ const LoginForm = () => {
       })
       .catch((error) => {
         setErrorMsgShow(true);
-        console.error('Error:', error);
+        console.error('Error in login api:', error);
       });
   };
 

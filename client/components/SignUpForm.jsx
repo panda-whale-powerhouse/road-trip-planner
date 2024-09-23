@@ -16,7 +16,6 @@ const SignUpForm = () => {
     setErrorMsgShow(false);
 
     const formData = { username, password };
-
     fetch('/signup', {
       method: 'POST',
       headers: {
@@ -28,7 +27,7 @@ const SignUpForm = () => {
       .then((data) => {
         console.log(data, 'signup response');
         if (data.success) {
-          navigate('/login');
+          navigate('/');
         } else {
           if (data.message === 'username taken') {
             setIsUsernameTaken(true);

@@ -2,10 +2,12 @@ const express = require('express');
 const app = express();
 require('dotenv').config();
 const path = require('path');
-const port = 8086;
+const port = 3000;
 const userController = require('./controllers/userController');
 const mongoose = require('mongoose');
 const mongoURI = process.env.MONGO_URI;
+const cors = require('cors');
+app.use(cors());
 mongoose.connect(mongoURI)
   .then(() => console.log(`Connected to MongoDB at ${mongoURI}`))
   .catch(err => console.error('Failed to connect to MongoDB', err));
