@@ -3,7 +3,9 @@ import { createSlice } from '@reduxjs/toolkit';
 const initialState = {
   destination: 'Los Angeles',
   origin: 'New York',
-  step: '',
+  step: 0,
+  waypoints: [],
+  waypointStr: '',
 };
 
 export const genSettingsSlice = createSlice({
@@ -21,9 +23,14 @@ export const genSettingsSlice = createSlice({
     updateStep: (state, newStep) => {
       state.step = newStep.payload;
     },
+
+    updateWaypoints: (state, action) => {
+      state.waypoints = action.payload;
+      state.waypointStr =  state.waypoints.reduce((str, waypoint) => str + waypoint + '|', '&waypoints=').slice(0, -1);
+    }
   },
 });
 
-export const { updateDestination, updateOrigin, updateStep } =
+export const { updateDestination, updateOrigin, updateStep, updateWaypoints } =
   genSettingsSlice.actions;
 export default genSettingsSlice.reducer;

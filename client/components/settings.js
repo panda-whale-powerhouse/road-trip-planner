@@ -31,10 +31,10 @@ const Settings = () => {
           onChange={(e) => dispatch(updateDestination(e.target.value))}
         ></input>
 
-        <label htmlFor='stops'>Stops:</label>
+        <label htmlFor='steps'>Step:</label>
         <input
-          id='stops'
-          type='text'
+          id='steps'
+          type='number'
           value={step}
           onChange={(e) => dispatch(updateStep(e.target.value))}
         ></input>

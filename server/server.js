@@ -37,6 +37,7 @@ app.get('/corsproxy/:url', async (req, res, next) => {
   try {
     console.log(req.params.url);
     // TODO: should be refactored to do this more dynamically
+
     const fetch_url = `${req.query.url}?key=${
       req.query.key
     }&origin=${req.query.origin.replace(
