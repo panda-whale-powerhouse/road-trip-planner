@@ -1,13 +1,14 @@
 // console.log("its working");
 
-import React, { useState, useEffect } from 'react';
-import { createRoot } from 'react-dom/client';
-import { Provider } from 'react-redux';
+import React, { useState, useEffect } from "react";
+import { createRoot } from "react-dom/client";
+import { Provider } from "react-redux";
+import { store } from "./app/store";
 
-import SavedTrips from './components/savedTrips';
-import Settings from './components/settings';
-import Map from './components/map';
-import { store } from './app/store';
+import SavedTrips from "./components/savedTrips";
+import Settings from "./components/settings";
+import Map from "./components/map";
+import WaypointContainer from "./components/WaypointContainer";
 
 const App = () => {
   return (
@@ -15,8 +16,9 @@ const App = () => {
       <SavedTrips />
 
       <div style={styles.settingMap}>
-       <Settings />
+        <Settings />
         <Map />
+        <WaypointContainer />
       </div>
     </div>
   );
@@ -24,18 +26,18 @@ const App = () => {
 
 const styles = {
   body: {
-    display: 'flex',
-    justifyContent: 'flex-start',
+    display: "flex",
+    justifyContent: "flex-start",
   },
   settingMap: {
-    display: 'flex',
-    flexDirection: 'column',
-    alignItems: 'center',
-    margin: '50px'
-  }
-}
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "center",
+    margin: "50px",
+  },
+};
 
-const root = createRoot(document.getElementById('app'));
+const root = createRoot(document.getElementById("app"));
 root.render(
   <Provider store={store}>
     <App />
