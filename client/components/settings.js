@@ -56,10 +56,8 @@ const Settings = () => {
       //        iterate through each leg's steps array,
       console.log("num legs = ", data.routes[0].legs.length);
       console.log("num routes = ", data.routes.length);
+      if (data.routes.length === 0) return;
       for (const leg of data.routes[0].legs) {
-        console.log(leg.start_address);
-        // console.log(`${leg.start_location.lat},${leg.start_location.lng}`);
-        // waypoints.push(`${leg.start_location.lat},${leg.start_location.lng}`);
         for (const step of leg.steps) {
           //              for each step, add its distance to the totalDist
           totalDist += step.distance.value;

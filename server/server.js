@@ -2,12 +2,12 @@ const express = require("express");
 const mongoose = require("mongoose");
 require("dotenv").config();
 
-const app = express();
 const userController = require("./controllers/userController");
 
 const PORT = 3000;
-const MONGO_URI = process.env.MONGO_URI;
+const app = express();
 
+const MONGO_URI = process.env.MONGO_URI;
 mongoose
   .connect(MONGO_URI)
   .then(() => console.log(`Connected to MongoDB at ${MONGO_URI}`))
@@ -60,9 +60,6 @@ app.get("/corsproxy/:url", async (req, res, next) => {
   }
 });
 
-// app.get('*', (req, res) => {
-//   res.sendFile(path.resolve(__dirname, '../../frontend/vite-app/dist/index.html'));
-// });
 //global error handler
 app.use((err, req, res, next) => {
   const defaultErr = {

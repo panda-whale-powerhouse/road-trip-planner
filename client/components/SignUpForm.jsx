@@ -1,23 +1,22 @@
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
-const LoginForm = () => {
+const SignUpForm = () => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
-  const [isPwdWrong, setIsPwdWrong] = useState(false);
+  const [isUsernameTaken, setIsUsernameTaken] = useState(false);
   const [fieldsFilled, setFieldsFilled] = useState(true);
   const [errorMsgShow, setErrorMsgShow] = useState(false);
   const navigate = useNavigate();
-  const handleLogin = (e) => {
-    setIsPwdWrong(false);
+
+  const handleSignUp = (e) => {
+    e.preventDefault();
+    setIsUsernameTaken(false);
     setFieldsFilled(true);
     setErrorMsgShow(false);
-    e.preventDefault();
-    const formData = {
-      username,
-      password
-    }
-    fetch('/login', {
+
+    const formData = { username, password };
+    fetch('/signup', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -26,13 +25,16 @@ const LoginForm = () => {
     })
       .then((response) => response.json())
       .then((data) => {
-        console.log(data, 'success logged in');
+        console.log(data, 'signup response');
         if (data.success) {
-          navigate('/mainPage');
+          navigate('/');
         } else {
-          if (data.message === 'Invalid information') {
-            setIsPwdWrong(true);
-          } else if (data.message === 'missing data: cannot find email or password in req.body') {
+          if (data.message === 'User already exists') {
+            setIsUsernameTaken(true);
+          } else if (
+            data.message ===
+            'missing data: cannot find email or password in req.body'
+          ) {
             setFieldsFilled(false);
           } else {
             setErrorMsgShow(true);
@@ -41,18 +43,14 @@ const LoginForm = () => {
       })
       .catch((error) => {
         setErrorMsgShow(true);
-        console.error('Error in login api:', error);
+        console.error('Error:', error);
       });
-  };
-
-  const handleSignUpClick = () => {
-    navigate('/signup');
   };
 
   return (
     <div>
-      <h2>Login</h2>
-      <form onSubmit={handleLogin}>
+      <h2>Sign Up</h2>
+      <form onSubmit={handleSignUp}>
         <div>
           <label htmlFor='username'>Username:</label>
           <input
@@ -73,14 +71,14 @@ const LoginForm = () => {
             required
           />
         </div>
-        <button type='submit'>Login</button>
+        <button type='submit'>Sign Up</button>
       </form>
-      {isPwdWrong && <p>Incorrect information</p>}
+      {isUsernameTaken && <p>Username is already taken</p>}
       {!fieldsFilled && <p>Please fill all fields</p>}
       {errorMsgShow && <p>An error occurred. Please try again.</p>}
-      <button onClick={handleSignUpClick}>Sign Up</button>
+      <Link to='/'>Back to Login</Link>
     </div>
   );
 };
 
-export default LoginForm;
+export default SignUpForm;
