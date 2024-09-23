@@ -44,6 +44,7 @@ userController.createUser = (req, res, next) => {
 };
 
 userController.verifyUser = (req, res, next) => {
+  console.log('backend called');
   const {username, password} = req.body;
   if(username && password) {
     User.findOne({username})
@@ -55,14 +56,24 @@ userController.verifyUser = (req, res, next) => {
           message: 'Invalid information',
         })
       } 
-      if(thisUser.password === password) {
-        res.locals.currentUser = thisUser;
-        return next();
-      } 
-      return next({
-        log: 'password and record does not match',
-        status: 401,
-        message: 'Invalid information',
+      bcrypt.compare(password, thisUser.password)
+      .then(isMatch => {
+        if(isMatch) {
+          res.locals.currentUser = thisUser;
+          return next();
+        } else {
+          return next({
+            log: 'password and record does not match',
+            status: 401,
+            message: 'Invalid information',
+          })
+        }
+      })
+      .catch(err => {
+        return next({
+          log: 'fail to compare hashed pwd to input pwd' + err.message,
+          message: 'Server error in bcrypt compare'
+        })
       })
     }).catch(err => {
       return next({
