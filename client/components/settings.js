@@ -4,16 +4,17 @@ import {
   updateDestination,
   updateOrigin,
   updateStep,
+  updateWaypoints
 } from '../features/genSettings/genSettingsSlice';
+import WaypointContainer from './waypointList';
 
 const Settings = () => {
   const origin = useSelector((state) => state.genSettings.origin);
   const destination = useSelector((state) => state.genSettings.destination);
   const step = useSelector((state) => state.genSettings.step);
   const dispatch = useDispatch();
+  const waypoints = useSelector((state)=> state.genSettings.waypoints)
 
-
-  const [waypoints, setWaypoints] = useState([])
   const inputRef = useRef(null);
 
   function handleChunk(e) {
@@ -23,10 +24,53 @@ const Settings = () => {
     const formData = new FormData(form);
     const formJson = Object.fromEntries(formData.entries());
 
-    setWaypoints(waypoints => [...waypoints, formJson.waypoints]);
+    dispatch(updateWaypoints([...waypoints, formJson.waypoints]));
 
     inputRef.current.value= '';
   }
+
+  function chunkRoute () {
+    async function getData() {
+      const response = await fetch(
+        `/corsproxy/directions?url=https://maps.googleapis.com/maps/api/directions/json&key=AIzaSyBgxv1mUqaMXN3hkGTaXLN1X3Lhc87pLN4&destination=New+York&origin=Los+Angeles`,
+        {
+          method: 'GET',
+          mode: 'cors',
+          headers: {
+            Accept: 'application/json',
+          },
+        }
+      )
+      const data = await response.json();
+      // console.dir(data);
+      //    initialize waypoints array = []
+      const waypoints = [];
+      let totalDist = 0;
+      const stepInMeters = step * 1609;
+      //    iterate through legs array, set totalDist = 0
+      //        iterate through each leg's steps array,
+      for ( const step of data.routes[0].legs[0].steps){
+      //              for each step, add its distance to the totalDist
+        totalDist += step.distance.value;
+        // if totalDist is greater than chunkLength:
+        if (totalDist > stepInMeters){
+           // add the startLocation (place id maybe?) from the step to our own waypoints array
+          waypoints.push(`${step.start_location.lat},${step.start_location.lng}`);
+          
+          // reset the totalDist to 0
+          totalDist = 0;
+        }
+      }
+      console.dir(waypoints);
+      dispatch(updateWaypoints(waypoints));
+       //    include waypoints array into the embedded map src url
+    }
+    // check for step if its nothing, return early
+    if (!step) return;
+    // fetch request to routes api using origin and destination
+    getData();
+  }
+
 
   return (
     <div>
@@ -57,27 +101,16 @@ const Settings = () => {
             value={step}
             onChange={(e) => dispatch(updateStep(e.target.value))}
           ></input>
-          <button type='submit'>Chunk Trip</button>
+            <button onClick={(e) => {e.preventDefault();chunkRoute()}}>Find Stops</button>
         </form> 
 
         <form style={styles.bottom} onSubmit= {handleChunk}>
           <label htmlFor='waypoints'>Stops You Want to Make:</label>
           <input type='text' ref = {inputRef} id= 'waypoints' name='waypoints'></input>
-          {/* <a href='/corsproxy/TEST'>CORSPROXY TEST</a> */}
           <button style= {styles.addWaypoint} type='submit'>Add</button>
         </form>
       </div>
-    <div style={styles.waypoints}>
-        <h3>Waypoint List:</h3>
-        <ul>
-          {waypoints.length === 0 ? 
-          (<li>No Waypoints Yet</li>) : (
-            waypoints.map((waypoint, index) => (
-              <li key={index}>{waypoint}</li>
-            ))
-          )}
-        </ul>
-      </div>
+      <WaypointContainer />
     </div>
   );
 };
@@ -97,16 +130,6 @@ const styles = {
   bottom: {
     display: 'flex',
     gap: '5px',
-  },
-  waypoints: {
-    border: '1px solid black',
-    display: 'flex',
-    position: 'absolute',
-    right: '20',
-    height: '400px',
-    width: '300px',
-    flexDirection: 'column',
-    padding: '10px'
   }
 };
 
