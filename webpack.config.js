@@ -16,10 +16,13 @@ module.exports = {
       directory: path.resolve(__dirname, './client'),
       publicPath: './',
     },
-    proxy: [{
-      context: ['/login','/signup', '/mainPage'],
-      target: "http://localhost:3000"
-    }]
+    proxy: [
+      {
+        context: ['/corsproxy','/login','/signup', '/mainPage'],
+        target: 'http://localhost:3000',
+        // secure: false,
+      },
+    ],
   },
   plugins: [
     new HtmlWebPackPlugin({
