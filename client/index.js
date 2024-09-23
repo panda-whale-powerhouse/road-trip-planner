@@ -13,14 +13,6 @@ import { store } from './app/store';
 
 const App = () => {
   return (
-    // <div style={styles.body}>
-    //   <SavedTrips />
-
-    //   <div style={styles.settingMap}>
-    //    <Settings />
-    //     <Map />
-    //   </div>
-    // </div>
     <Router>
       <Routes>
         <Route path = "/" element={<LoginForm/>}/>

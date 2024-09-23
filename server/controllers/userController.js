@@ -72,7 +72,7 @@ userController.verifyUser = (req, res, next) => {
       .catch(err => {
         return next({
           log: 'fail to compare hashed pwd to input pwd' + err.message,
-          method: 'Server error in bcrypt compare'
+          message: 'Server error in bcrypt compare'
         })
       })
     }).catch(err => {

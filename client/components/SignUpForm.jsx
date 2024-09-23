@@ -29,9 +29,12 @@ const SignUpForm = () => {
         if (data.success) {
           navigate('/');
         } else {
-          if (data.message === 'username taken') {
+          if (data.message === 'User already exists') {
             setIsUsernameTaken(true);
-          } else if (data.message === 'missing information') {
+          } else if (
+            data.message ===
+            'missing data: cannot find email or password in req.body'
+          ) {
             setFieldsFilled(false);
           } else {
             setErrorMsgShow(true);
@@ -73,7 +76,7 @@ const SignUpForm = () => {
       {isUsernameTaken && <p>Username is already taken</p>}
       {!fieldsFilled && <p>Please fill all fields</p>}
       {errorMsgShow && <p>An error occurred. Please try again.</p>}
-      <Link to='/login'>Back to Login</Link>
+      <Link to='/'>Back to Login</Link>
     </div>
   );
 };

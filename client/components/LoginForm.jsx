@@ -30,9 +30,9 @@ const LoginForm = () => {
         if (data.success) {
           navigate('/mainPage');
         } else {
-          if (data.message === 'incorrect information') {
+          if (data.message === 'Invalid information') {
             setIsPwdWrong(true);
-          } else if (data.message === 'missing information') {
+          } else if (data.message === 'missing data: cannot find email or password in req.body') {
             setFieldsFilled(false);
           } else {
             setErrorMsgShow(true);
@@ -75,7 +75,7 @@ const LoginForm = () => {
         </div>
         <button type='submit'>Login</button>
       </form>
-      {isPwdWrong && <p>Incorrect password</p>}
+      {isPwdWrong && <p>Incorrect information</p>}
       {!fieldsFilled && <p>Please fill all fields</p>}
       {errorMsgShow && <p>An error occurred. Please try again.</p>}
       <button onClick={handleSignUpClick}>Sign Up</button>
