@@ -18,7 +18,7 @@ module.exports = {
     },
     proxy: [
       {
-        context: ['/corsproxy'],
+        context: ['/corsproxy','/login','/signup', '/mainPage'],
         target: 'http://localhost:3000',
         // secure: false,
       },

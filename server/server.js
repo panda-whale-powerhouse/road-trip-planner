@@ -1,18 +1,46 @@
-const express = require('express');
-const mongoose = require('mongoose');
-require('dotenv').config();
+const express = require("express");
+const mongoose = require("mongoose");
+require("dotenv").config();
 
-const app = express();
-const userController = require('./controllers/userController');
+const userController = require("./controllers/userController");
 
 const PORT = 3000;
-const MONGO_URI = process.env.MONGO_URI;
+const app = express();
+<<<<<<< HEAD
 
+const MONGO_URI = process.env.MONGO_URI;
 mongoose
   .connect(MONGO_URI)
   .then(() => console.log(`Connected to MongoDB at ${MONGO_URI}`))
-  .catch((err) => console.error('Failed to connect to MongoDB', err));
+  .catch((err) => console.error("Failed to connect to MongoDB", err));
 
+app.use(express.json());
+
+app.post("/login", userController.verifyUser, (req, res) => {
+  res.status(200).json({
+    success: true,
+    message: "successfully login",
+  });
+});
+app.post("/signup", userController.createUser, (req, res) => {
+  res.status(200).json({
+    success: true,
+    message: "successfully signed up",
+  });
+});
+
+=======
+require('dotenv').config();
+const path = require('path');
+const port = 3000;
+const userController = require('./controllers/userController');
+const mongoose = require('mongoose');
+const mongoURI = process.env.MONGO_URI;
+
+
+mongoose.connect(mongoURI)
+  .then(() => console.log(`Connected to MongoDB at ${mongoURI}`))
+  .catch(err => console.error('Failed to connect to MongoDB', err));
 app.use(express.json());
 
 app.post('/login', userController.verifyUser, (req, res) => {
@@ -64,13 +92,14 @@ app.get('/corsproxy/:url', async (req, res, next) => {
 // app.get('*', (req, res) => {
 //   res.sendFile(path.resolve(__dirname, '../../frontend/vite-app/dist/index.html'));
 // });
+>>>>>>> 349c4fd2a63db8d054f68ed34d89d1069a20bba9
 //global error handler
 app.use((err, req, res, next) => {
   const defaultErr = {
     success: false,
-    log: 'Express error handler caught unknown middleware error',
+    log: "Express error handler caught unknown middleware error",
     status: 500,
-    message: 'An error occurred',
+    message: "An error occurred",
   };
   const errorObj = Object.assign({}, defaultErr, err);
 
