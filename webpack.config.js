@@ -18,7 +18,7 @@ module.exports = {
     },
     proxy: [
       {
-        context: ['/corsproxy','/login','/signup', '/mainPage'],
+        context: ['/corsproxy', '/login', '/signup', '/mainPage'],
         target: 'http://localhost:3000',
         // secure: false,
       },
@@ -38,7 +38,15 @@ module.exports = {
         use: {
           loader: 'babel-loader',
           options: {
-            presets: [['@babel/preset-env'], ['@babel/preset-react']],
+            presets: [
+              ['@babel/preset-env', { target: { node: 'current' } }],
+              ['@babel/preset-react'],
+              ['@babel/preset'],
+            ],
+            plugin: [
+              '@babel/plugin-transform-runtime',
+              '@babel/transform-async-to-generator',
+            ],
           },
         },
       },
