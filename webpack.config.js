@@ -8,14 +8,12 @@ module.exports = {
   output: {
     path: path.resolve(__dirname, "./dist"),
     filename: "bundle.js",
+    publicPath: '/'
   },
   devtool:
     process.env.NODE_ENV === "production" ? false : "eval-cheap-source-map",
   devServer: {
-    static: {
-      directory: path.resolve(__dirname, "./client"),
-      publicPath: "./",
-    },
+      historyApiFallback: true,
     proxy: [
       {
         context: ["/corsproxy", "/login", "/signup", "/mainPage"],
@@ -43,7 +41,7 @@ module.exports = {
         },
       },
       {
-        test: /\css?$/,
+        test: /\css?$/, //Is this right?
         exclude: /node_modules/,
         use: ["style-loader", "css-loader"],
       },

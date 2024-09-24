@@ -7,6 +7,7 @@ const SavedTrips = () => {
             Trip to Texas!
             <br></br>
             ...
+            {/* This can be built out! Can be stored in redux */}
         </div>
     )
 }

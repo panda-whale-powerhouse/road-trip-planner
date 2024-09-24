@@ -46,7 +46,7 @@ const LoginForm = () => {
   };
 
   const handleSignUpClick = () => {
-    navigate('/signup');
+    navigate('/mainPage');
   };
 
   return (

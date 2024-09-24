@@ -15,6 +15,15 @@ mongoose
 
 app.use(express.json());
 
+app.get('/*', function(req, res) {
+  res.sendFile(path.join(__dirname, 'client/index.html'), function(err) {
+    if (err) {
+      console.log('Problem with the server redirector!')
+      res.status(500).send(err)
+    }
+  })
+})
+
 app.post("/login", userController.verifyUser, (req, res) => {
   res.status(200).json({
     success: true,
@@ -59,6 +68,11 @@ app.get("/corsproxy/:url", async (req, res, next) => {
     });
   }
 });
+
+
+app.use((req, res) =>
+  res.status(404).send('404, page not found.')
+);
 
 //global error handler
 app.use((err, req, res, next) => {
