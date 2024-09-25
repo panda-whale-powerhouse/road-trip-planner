@@ -20,7 +20,7 @@ app.use(cookieParser());
 
 app.get('/mainPage', (req, res) => {
   res.status(200);
-})
+});
 
 app.post('/login', userController.verifyUser, (req, res) => {
   res.status(200).json({
@@ -41,6 +41,10 @@ app.post('/roadtrips', roadtripController.createRoadtrip, (req, res) => {
     success: true,
     message: 'successfully created new trip',
   });
+});
+
+app.get('/roadtrips', roadtripController.getUserRoadtrips, (req, res) => {
+  res.status(200).json(res.locals.roadtrips);
 });
 
 // used to try to get around broswer's cross origin issues on frontend
