@@ -15,8 +15,8 @@ const LoginForm = () => {
     e.preventDefault();
     const formData = {
       username,
-      password
-    }
+      password,
+    };
     fetch('/login', {
       method: 'POST',
       headers: {
@@ -32,7 +32,10 @@ const LoginForm = () => {
         } else {
           if (data.message === 'Invalid information') {
             setIsPwdWrong(true);
-          } else if (data.message === 'missing data: cannot find email or password in req.body') {
+          } else if (
+            data.message ===
+            'missing data: cannot find email or password in req.body'
+          ) {
             setFieldsFilled(false);
           } else {
             setErrorMsgShow(true);
