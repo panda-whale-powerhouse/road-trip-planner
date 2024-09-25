@@ -64,7 +64,9 @@ userController.verifyUser = (req, res, next) => {
           .then((isMatch) => {
             if (isMatch) {
               res.locals.currentUser = thisUser;
-              res.cookie('sessionId', thisUser._id.toString());
+              res.cookie('sessionId', thisUser._id.toString(), {
+                maxAge: 1800000,
+              });
               return next();
             } else {
               return next({
