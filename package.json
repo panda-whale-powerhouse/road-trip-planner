@@ -6,7 +6,8 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "concurrently \"cross-env NODE_ENV=development webpack-dev-server\" \"nodemon ./server/server.js\"",
-    "build": "cross-env NODE_ENV=production webpack"
+    "build": "cross-env NODE_ENV=production webpack",
+    "jest": "jest --verbose"
   },
   "repository": {
     "type": "git",
@@ -18,14 +19,6 @@
     "url": "https://github.com/Goblin-Shark-Scratch-Project/road-trip-planner/issues"
   },
   "homepage": "https://github.com/Goblin-Shark-Scratch-Project/road-trip-planner/",
-  "jest": {
-    "globalSetup": "./jest-setup.js",
-    "globalTeardown": "./jest-environment-jsdom",
-    "testEnvironment": "jest-environment-jsdom",
-    "setupFileAfterEnv": [
-      "@testing-library/jest-dom/extend-expect"
-    ]
-  },
   "devDependencies": {
     "@babel/core": "^7.25.2",
     "@babel/plugin-transform-runtime": "^7.25.4",
@@ -43,6 +36,7 @@
     "dotenv-webpack": "^8.1.0",
     "html-webpack-plugin": "^5.6.0",
     "jest": "^29.7.0",
+    "jest-environment-jsdom": "^29.7.0",
     "nodemon": "^3.1.7",
     "react-test-renderer": "^18.3.1",
     "style-loader": "^4.0.0",
