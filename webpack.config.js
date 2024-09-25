@@ -8,12 +8,16 @@ module.exports = {
   output: {
     path: path.resolve(__dirname, "./dist"),
     filename: "bundle.js",
-    publicPath: '/'
+    // publicPath: '/'
   },
   devtool:
     process.env.NODE_ENV === "production" ? false : "eval-cheap-source-map",
   devServer: {
-      historyApiFallback: true,
+    static: {
+      directory: path.resolve(__dirname, './client'),
+      publicPath: './'
+    },
+      // historyApiFallback: true,
     proxy: [
       {
         context: ["/corsproxy", "/login", "/signup", "/mainPage"],

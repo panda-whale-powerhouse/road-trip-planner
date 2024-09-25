@@ -7,11 +7,12 @@ const WaypointContainer = () => {
     <div style={styles.waypoints}>
       <h3>Waypoint List:</h3>
       <ul>
-        {waypoints.length === 0 ? (
-          <li>No Waypoints Yet</li>
-        ) : (
-          waypoints.map((waypoint, index) => <li key={index}>{waypoint}</li>)
-        )}
+        {waypoints.length === 0 ? 
+        (<li>No Waypoints Yet</li>) : (
+          waypoints.map((waypoint, index) => (
+          <li key={index}>{waypoint}</li>
+        ))
+      )}
       </ul>
     </div>
   );

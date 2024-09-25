@@ -1,5 +1,10 @@
 import React, {useState, useEffect} from 'react';
 
+
+const createTrip = () => {
+    fetch()
+}
+
 const SavedTrips = () => {
     return(
         <div style={styles.savedBox}>

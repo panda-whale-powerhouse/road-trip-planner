@@ -41,6 +41,7 @@ app.post('/roadtrips', roadtripController.createRoadtrip, (req, res) => {
 // only seems to work with :param syntax?
 app.get('/corsproxy/:url', async (req, res, next) => {
   try {
+    console.log('1')
     const fetch_url = `${req.query.url}?key=${
       req.query.key
     }&origin=${req.query.origin.replace(
@@ -49,9 +50,11 @@ app.get('/corsproxy/:url', async (req, res, next) => {
     )}&destination=${req.query.destination.replace(' ', '+')}${
       req.query.waypoints ? '&waypoints=' + req.query.waypoints : ''
     }`;
-
+    console.log('2')
     const response = await fetch(fetch_url);
+    console.log('3', response)
     const data = await response.json();
+    console.log('4', data)
     return res
       .status(200)
       .setHeader('Access-Control-Allow-Origin', '*') // all this is to set this header on the response to the browser
