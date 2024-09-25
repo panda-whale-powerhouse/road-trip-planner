@@ -1,17 +1,23 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice } from '@reduxjs/toolkit';
 
 const initialState = {
-  destination: "",
-  origin: "",
+  name: '',
+  destination: '',
+  origin: '',
   step: 0,
   waypoints: [],
-  waypointStr: "",
+  waypointStr: '',
 };
 
 export const genSettingsSlice = createSlice({
-  name: "genSettings",
+  name: 'genSettings',
   initialState,
   reducers: {
+    updateName: (state, newName) => {
+      state.name = newName.payload;
+      console.log("Name Updated!", state.name)
+    },
+
     updateOrigin: (state, newOrigin) => {
       state.origin = newOrigin.payload;
     },
@@ -28,7 +34,7 @@ export const genSettingsSlice = createSlice({
       state.waypoints = action.payload;
       state.waypointStr = state.waypoints
         .slice(0, 11)
-        .reduce((str, waypoint) => str + waypoint + "|", "&waypoints=")
+        .reduce((str, waypoint) => str + waypoint + '|', '&waypoints=')
         .slice(0, -1);
     },
 
@@ -36,13 +42,14 @@ export const genSettingsSlice = createSlice({
       state.waypoints.push(action.payload);
       state.waypointStr = state.waypoints
         .slice(0, 11)
-        .reduce((str, waypoint) => str + waypoint + "|", "&waypoints=")
+        .reduce((str, waypoint) => str + waypoint + '|', '&waypoints=')
         .slice(0, -1);
     },
   },
 });
 
 export const {
+  updateName,
   updateDestination,
   updateOrigin,
   updateStep,
