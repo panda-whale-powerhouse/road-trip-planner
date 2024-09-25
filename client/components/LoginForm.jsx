@@ -26,7 +26,7 @@ const LoginForm = () => {
     };
 
   const handleSignUpClick = () => {
-    navigate('/signup');
+    navigate('/mainPage');
   };
 
   const handleBypass = () => {
