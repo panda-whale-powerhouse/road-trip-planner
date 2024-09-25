@@ -33,7 +33,7 @@ app.post('/signup', userController.createUser, (req, res) => {
 app.post('/roadtrips', roadtripController.createRoadtrip, (req, res) => {
   res.status(200).json({
     success: true,
-    message: 'successfully created new route',
+    message: 'successfully created new trip',
   });
 });
 
@@ -75,7 +75,7 @@ app.get('/corsproxy/:url', async (req, res, next) => {
 
 
 app.use((req, res) =>
-  res.status(404).send('404, page not found.')
+  res.status(404).send('404, page not here man.')
 );
 
 //global error handler

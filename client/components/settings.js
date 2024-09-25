@@ -1,18 +1,21 @@
 import React, { useRef } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import {
+  updateName,
   addWaypoint,
   updateDestination,
   updateOrigin,
   updateStep,
   updateWaypoints,
-} from '../features/genSettings/genSettingsSlice';
+} from '../reducers/genSettingsSlice';
 
 const Settings = () => {
+  const name = useSelector((state) => state.genSettings.name);
   const origin = useSelector((state) => state.genSettings.origin);
   const destination = useSelector((state) => state.genSettings.destination);
   const step = useSelector((state) => state.genSettings.step);
   const waypointStr = useSelector((state) => state.genSettings.waypointStr);
+  const totalStore = useSelector((state) => state.genSettings);
   //Can we make this more dry?
 
   const dispatch = useDispatch();
@@ -90,72 +93,93 @@ const Settings = () => {
 
   function saveTrip() {
     //make post request to DB sending:
-    //genSettingsSlice, name of trip, name of person
-    const bodyObj = { tripData: 'State?', creator: '?', roadtripName: '?' };
-    fetch('roadtrips', {
+      //genSettingsSlice, name of trip, name of person
+    // console.log('Clicked saveTrip');
+    const bodyObj = {
+      tripData: totalStore,
+      creator: "Alex's Cookie",
+      roadtripName: name,
+    };
+    console.log('Post Body here:', bodyObj);
+    fetch('/roadtrips', {
+      //I believe this route is causing us issues
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
-      }
+      },
       body: JSON.stringify(bodyObj),
     })
-    //reset 
+      .then((response) => response.json())
+      .then((data) => {
+        console.log(data, 'newroute response');
+      })
+      .catch((error) => {
+        console.error('Error:', error);
+      });
+    //reset store? (STRETCH GOAL)
 
     //if we can't reload page, we need to find a way to reload savedTrips component
   }
 
   return (
     <div style={styles.settings}>
-      <form>
-        <form style={styles.top}>
-          <label htmlFor='from'>From:</label>
-          <input
-            id='from'
-            type='text'
-            value={origin}
-            onChange={(e) => dispatch(updateOrigin(e.target.value))}
-          ></input>
+      <form style={styles.top}>
+        <input
+          type='text'
+          onChange={(e) => dispatch(updateName(e.target.value))}
+        ></input>
+        <button type='button' onClick={saveTrip}>
+          Save Trip
+        </button>
+      </form>
 
-          <label htmlFor='to'>To:</label>
-          <input
-            id='to'
-            type='text'
-            value={destination}
-            onChange={(e) => dispatch(updateDestination(e.target.value))}
-          ></input>
-        </form>
+      <form style={styles.top}>
+        <label htmlFor='from'>From:</label>
+        <input
+          id='from'
+          type='text'
+          value={origin}
+          onChange={(e) => dispatch(updateOrigin(e.target.value))}
+        ></input>
 
-        <form style={styles.bottom}>
-          <label htmlFor='steps'>Chunk Trip By Miles:</label>
-          <input
-            id='steps'
-            type='number'
-            value={step}
-            onChange={(e) => dispatch(updateStep(e.target.value))}
-          ></input>
-          <button
-            onClick={(e) => {
-              e.preventDefault();
-              chunkRoute();
-            }}
-          >
-            Find Stops
-          </button>
-        </form>
+        <label htmlFor='to'>To:</label>
+        <input
+          id='to'
+          type='text'
+          value={destination}
+          onChange={(e) => dispatch(updateDestination(e.target.value))}
+        ></input>
+      </form>
 
-        <form style={styles.bottom} onSubmit={handleChunk}>
-          <label htmlFor='waypoints'>Stops You Want to Make:</label>
-          <input
-            type='text'
-            ref={inputRef}
-            id='waypoints'
-            name='waypoints'
-          ></input>
-          <button style={styles.addWaypoint} type='submit'>
-            Add
-          </button>
-        </form>
-        <button onClick={saveTrip}>Save Trip</button>
+      <form style={styles.bottom}>
+        <label htmlFor='steps'>Chunk Trip By Miles:</label>
+        <input
+          id='steps'
+          type='number'
+          value={step}
+          onChange={(e) => dispatch(updateStep(e.target.value))}
+        ></input>
+        <button
+          onClick={(e) => {
+            e.preventDefault();
+            chunkRoute();
+          }}
+        >
+          Find Stops
+        </button>
+      </form>
+
+      <form style={styles.bottom} onSubmit={handleChunk}>
+        <label htmlFor='waypoints'>Stops You Want to Make:</label>
+        <input
+          type='text'
+          ref={inputRef}
+          id='waypoints'
+          name='waypoints'
+        ></input>
+        <button style={styles.addWaypoint} type='submit'>
+          Add
+        </button>
       </form>
     </div>
   );
