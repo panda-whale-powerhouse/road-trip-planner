@@ -3,8 +3,10 @@ const Roadtrip = require('../models/roadtripModel');
 const roadtripController = {};
 
 roadtripController.createRoadtrip = async (req, res, next) => {
+  console.log('Made it to RoadtripController!')
+  console.log(req)
   const roadtripName = req.body.roadtripName;
-  const creator = req.body.creator;
+  const creator = req.cookies.sessionId
   const tripData = req.body.tripData;
 
   try {

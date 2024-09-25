@@ -19,7 +19,7 @@ module.exports = {
       // historyApiFallback: true,
     proxy: [
       {
-        context: ['/corsproxy', '/login', '/signup', '/mainPage'],
+        context: ['/corsproxy', '/login', '/signup', '/roadtrips'],
         target: 'http://localhost:3000',
         // secure: false,
       },
