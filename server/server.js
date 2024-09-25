@@ -1,5 +1,6 @@
 const express = require('express');
 const mongoose = require('mongoose');
+const cookieParser = require('cookie-parser');
 require('dotenv').config();
 
 const userController = require('./controllers/userController');
@@ -15,6 +16,7 @@ mongoose
   .catch((err) => console.error('Failed to connect to MongoDB', err));
 
 app.use(express.json());
+app.use(cookieParser());
 
 app.post('/login', userController.verifyUser, (req, res) => {
   res.status(200).json({
@@ -42,7 +44,7 @@ app.post('/roadtrips', roadtripController.createRoadtrip, (req, res) => {
 
 app.get('/corsproxy/:url', async (req, res, next) => {
   try {
-    console.log('1')
+    console.log('1');
     const fetch_url = `${req.query.url}?key=${
       req.query.key
     }&origin=${req.query.origin.replace(
@@ -51,11 +53,11 @@ app.get('/corsproxy/:url', async (req, res, next) => {
     )}&destination=${req.query.destination.replace(' ', '+')}${
       req.query.waypoints ? '&waypoints=' + req.query.waypoints : ''
     }`;
-    console.log('2')
+    console.log('2');
     const response = await fetch(fetch_url);
-    console.log('3', response)
+    console.log('3', response);
     const data = await response.json();
-    console.log('4', data)
+    console.log('4', data);
     return res
       .status(200)
       .setHeader('Access-Control-Allow-Origin', '*') // all this is to set this header on the response to the browser
@@ -73,10 +75,7 @@ app.get('/corsproxy/:url', async (req, res, next) => {
   }
 });
 
-
-app.use((req, res) =>
-  res.status(404).send('404, page not here man.')
-);
+app.use((req, res) => res.status(404).send('404, page not here man.'));
 
 //global error handler
 app.use((err, req, res, next) => {
