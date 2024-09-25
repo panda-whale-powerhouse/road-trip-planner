@@ -1,4 +1,4 @@
-import Trip from './components/Trip'
+import React from 'react';
 
 const SavedTrips = () => {
   return (

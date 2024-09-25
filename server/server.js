@@ -39,6 +39,7 @@ app.post('/roadtrips', roadtripController.createRoadtrip, (req, res) => {
 
 // used to try to get around broswer's cross origin issues on frontend
 // only seems to work with :param syntax?
+
 app.get('/corsproxy/:url', async (req, res, next) => {
   try {
     const fetch_url = `${req.query.url}?key=${
@@ -54,6 +55,7 @@ app.get('/corsproxy/:url', async (req, res, next) => {
     const data = await response.json();
     return res
       .status(200)
+      .setHeader('Access-Control-Allow-Origin', '*') // all this is to set this header on the response to the browser
       .setHeader('Access-Control-Allow-Origin', '*') // all this is to set this header on the response to the browser
       .json(data);
 
@@ -85,6 +87,6 @@ app.use((err, req, res, next) => {
   });
 });
 
-app.listen(PORT, () => {
+module.exports = app.listen(PORT, () => {
   console.log(`Server is running on http://localhost:${PORT}`);
 });

@@ -84,8 +84,8 @@ const Settings = () => {
   }
 
   return (
-    <div style={styles.settings}>
-      <form style={styles.top}>
+    <div>
+      <form>
         <label htmlFor="from">From:</label>
         <input
           id="from"
@@ -103,7 +103,7 @@ const Settings = () => {
         ></input>
       </form>
 
-      <form style={styles.bottom}>
+      <form>
         <label htmlFor="steps">Chunk Trip By Miles:</label>
         <input
           id="steps"
@@ -121,7 +121,7 @@ const Settings = () => {
         </button>
       </form>
 
-      <form style={styles.bottom} onSubmit={handleChunk}>
+      <form onSubmit={handleChunk}>
         <label htmlFor="waypoints">Stops You Want to Make:</label>
         <input
           type="text"
@@ -129,30 +129,12 @@ const Settings = () => {
           id="waypoints"
           name="waypoints"
         ></input>
-        <button style={styles.addWaypoint} type="submit">
+        <button type="submit">
           Add
         </button>
       </form>
     </div>
   );
-};
-
-const styles = {
-  settings: {
-    display: "flex",
-    justifyContent: "space-evenly",
-    alignItems: "flex-start",
-    flexDirection: "column",
-    position: "relative",
-  },
-  top: {
-    display: "flex",
-    gap: "5px",
-  },
-  bottom: {
-    display: "flex",
-    gap: "5px",
-  },
 };
 
 export default Settings;

@@ -1,4 +1,5 @@
 import React from "react";
+import "./assets/style.scss"
 import { createRoot } from "react-dom/client";
 import { Provider } from "react-redux";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
@@ -15,7 +16,7 @@ import WaypointContainer from "./components/WaypointContainer";
 
 const App = () => {
   return (
-    <div styles={styles.background}>
+    <div id='background'>
       <Router>
         <Routes>
           <Route path="/" element={<LoginForm />} />
@@ -23,17 +24,13 @@ const App = () => {
           <Route
             path="/mainPage"
             element={
-              <div style={styles.body}>
-                <SavedTrips />
-
-                <div style={styles.settingMap}>
+              <div id='trips'>
+                <SavedTrips id='trips2' />
+                <div id='settings'>
                   <Settings />
                   <Map />
-                </div>
-
-                <div style={styles.waypoint}>
-                <WaypointContainer />
-                </div>
+              </div>
+                  <WaypointContainer />
               </div>
             }
           />
@@ -44,22 +41,22 @@ const App = () => {
   );
 };
 
-const styles = {
-  body: {
-    display: "flex",
-    justifyContent: "flex-start",
-    position: 'relative',
-  },
-  settingMap: {
-    display: "flex",
-    flexDirection: "column",
-    alignItems: "center",
-    margin: "50px",
-  },
-  waypoint: {
-    marginTop: '35px'
-  },
-};
+// const styles = {
+//   body: {
+//     display: "flex",
+//     justifyContent: "flex-start",
+//     position: 'relative',
+//   },
+//   settingMap: {
+//     display: "flex",
+//     flexDirection: "column",
+//     alignItems: "center",
+//     margin: "50px",
+//   },
+//   waypoint: {
+//     marginTop: '35px'
+//   },
+// };
 
 const root = createRoot(document.getElementById("app"));
 root.render(

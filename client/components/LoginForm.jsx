@@ -33,7 +33,7 @@ const LoginForm = () => {
     navigate('/mainPage');
   };
     return (
-      <div>
+      <div id='login'>
       <h2>Login</h2>
       <form onSubmit={handleLogin}>
         <div>

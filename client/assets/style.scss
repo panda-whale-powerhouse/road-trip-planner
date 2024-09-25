@@ -1,0 +1,61 @@
+#b {
+  background-color: lightblue;
+}
+
+#app {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
+h1 {
+  display: flex;
+  justify-content: center;
+}
+
+#login {
+  width: 50em;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.LoginForm {
+  display: flex;
+  flex-direction: row;
+
+}
+
+#settings {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+#trips{
+  display: flex;
+  flex-direction: row;
+}
+
+
+
+#background {
+  display: flex;
+  flex-direction: column;
+  background-color: lightblue;
+  border: 1px solid red;
+  display: flex;
+  justify-content: flex-start;
+  position: relative;
+}
+
+#settings {
+  display: flex;
+  align-items: center;
+  margin: 50px
+}
+
+#waypoints {
+  margin-top: 35px
+}
