@@ -18,6 +18,10 @@ mongoose
 app.use(express.json());
 app.use(cookieParser());
 
+app.get('/mainPage', (req, res) => {
+  res.status(200);
+})
+
 app.post('/login', userController.verifyUser, (req, res) => {
   res.status(200).json({
     success: true,
