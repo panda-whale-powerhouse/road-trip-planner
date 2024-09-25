@@ -1,8 +1,12 @@
 const express = require('express');
 const mongoose = require('mongoose');
 require('dotenv').config();
+const express = require('express');
+const mongoose = require('mongoose');
+require('dotenv').config();
 
 const userController = require('./controllers/userController');
+const roadtripController = require('./controllers/roadtripController');
 
 const PORT = 3000;
 const app = express();
@@ -11,6 +15,7 @@ const MONGO_URI = process.env.MONGO_URI;
 mongoose
   .connect(MONGO_URI)
   .then(() => console.log(`Connected to MongoDB at ${MONGO_URI}`))
+  .catch((err) => console.error('Failed to connect to MongoDB', err));
   .catch((err) => console.error('Failed to connect to MongoDB', err));
 
 app.use(express.json());
@@ -29,13 +34,25 @@ app.post('/signup', userController.createUser, (req, res) => {
   });
 });
 
+app.post('/roadtrips', roadtripController.createRoadtrip, (req, res) => {
+  res.status(200).json({
+    success: true,
+    message: 'successfully created new route',
+  });
+});
+
 // used to try to get around broswer's cross origin issues on frontend
 // only seems to work with :param syntax?
+app.get('/corsproxy/:url', async (req, res, next) => {
 app.get('/corsproxy/:url', async (req, res, next) => {
   try {
     const fetch_url = `${req.query.url}?key=${
       req.query.key
     }&origin=${req.query.origin.replace(
+      ' ',
+      '+'
+    )}&destination=${req.query.destination.replace(' ', '+')}${
+      req.query.waypoints ? '&waypoints=' + req.query.waypoints : ''
       ' ',
       '+'
     )}&destination=${req.query.destination.replace(' ', '+')}${
@@ -46,6 +63,7 @@ app.get('/corsproxy/:url', async (req, res, next) => {
     const data = await response.json();
     return res
       .status(200)
+      .setHeader('Access-Control-Allow-Origin', '*') // all this is to set this header on the response to the browser
       .setHeader('Access-Control-Allow-Origin', '*') // all this is to set this header on the response to the browser
       .json(data);
 
