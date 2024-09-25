@@ -64,6 +64,7 @@ userController.verifyUser = (req, res, next) => {
           .then((isMatch) => {
             if (isMatch) {
               res.locals.currentUser = thisUser;
+              res.cookie('sessionId', thisUser._id.toString());
               return next();
             } else {
               return next({
