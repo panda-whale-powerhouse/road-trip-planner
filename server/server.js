@@ -1,9 +1,6 @@
 const express = require('express');
 const mongoose = require('mongoose');
 require('dotenv').config();
-const express = require('express');
-const mongoose = require('mongoose');
-require('dotenv').config();
 
 const userController = require('./controllers/userController');
 const roadtripController = require('./controllers/roadtripController');
@@ -15,7 +12,6 @@ const MONGO_URI = process.env.MONGO_URI;
 mongoose
   .connect(MONGO_URI)
   .then(() => console.log(`Connected to MongoDB at ${MONGO_URI}`))
-  .catch((err) => console.error('Failed to connect to MongoDB', err));
   .catch((err) => console.error('Failed to connect to MongoDB', err));
 
 app.use(express.json());
@@ -43,16 +39,12 @@ app.post('/roadtrips', roadtripController.createRoadtrip, (req, res) => {
 
 // used to try to get around broswer's cross origin issues on frontend
 // only seems to work with :param syntax?
-app.get('/corsproxy/:url', async (req, res, next) => {
+
 app.get('/corsproxy/:url', async (req, res, next) => {
   try {
     const fetch_url = `${req.query.url}?key=${
       req.query.key
     }&origin=${req.query.origin.replace(
-      ' ',
-      '+'
-    )}&destination=${req.query.destination.replace(' ', '+')}${
-      req.query.waypoints ? '&waypoints=' + req.query.waypoints : ''
       ' ',
       '+'
     )}&destination=${req.query.destination.replace(' ', '+')}${
