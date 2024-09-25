@@ -1,14 +1,29 @@
-import React, {useState, useEffect} from 'react';
+import Trip from './components/Trip'
 
-const SavedTrips = () => {
-    return(
-        <div style={styles.savedBox}>
-            <h3>Saved Trips:</h3>
-            Trip to Texas!
-            <br></br>
-            ...
-        </div>
-    )
+const SavedTrips = ({ savedTrips }) => {
+  if (!savedTrips) {
+    savedTrips.from = '';
+    savedTrips.to = '';
+    savedTrips.waypoints = [];
+  }
+  const tripList = [];
+  for (let i = 0; i < savedTrips.length; i++) {
+    tripList.push(
+      <Trip
+        from={savedTrips[i].from}
+        to={savedTrips[i].to}
+        waypoints={savedTrips[i].waypoints}
+        />
+    );
+  }
+  return (
+    <div style={styles.savedBox}>
+        <h3>Saved Trips:</h3>
+        Trip to Texas!
+        <br></br>
+        ...
+    </div>
+  );
 }
 
 

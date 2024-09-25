@@ -2,7 +2,7 @@ import { useSelector } from "react-redux"
 import React from 'react'
 
 
-const WaypointContainer =() => {
+const WaypointContainer = () => {
     const waypoints = useSelector((state)=> state.genSettings.waypoints)
     return (
         <div style={styles.waypoints}>
