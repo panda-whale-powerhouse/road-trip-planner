@@ -83,11 +83,23 @@ button {
   height: 7em;
 }
 
+#TripDetails {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  width: 35em;
+}
+
+#from {
+  display: flex;
+  justify-content: flex-start;
+}
+
 #settings {
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
-  align-items: center;
 }
 
 #trips{

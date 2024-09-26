@@ -40,7 +40,7 @@ const LoginForm = () => {
     <div id= 'head1'>
       <img src={logo} alt='logo' width='750w'></img>
     <div id='login'>
-      <form id='fields' onSubmit={handleLogin}>
+      <form id='fields'>
         <div>
           <TextField
             className='Input'
@@ -66,7 +66,7 @@ const LoginForm = () => {
         <Button variant="contained" type='submit'>Login</Button>
       </form>
       <div id='buttonField'>
-        <Button variant="contained" type='submit'>Login</Button>
+        <Button variant="contained" onClick={handleLogin}>Login</Button>
         <Button variant="contained" onClick={handleSignUpClick}>Sign Up</Button>
       </div>
     </div>
