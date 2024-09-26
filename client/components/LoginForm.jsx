@@ -7,12 +7,10 @@ import { login } from '../reducers/authSlice';
 import { useNavigate } from 'react-router-dom';
 import logo from '../assets/logo.png';
 
-
 const LoginForm = () => {
-
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  
+
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
 
@@ -23,15 +21,19 @@ const LoginForm = () => {
       .then(() => {
         setUsername('');
         setPassword('');
-        navigate('/mainPage')
+        navigate('/mainPage');
       })
       .catch((error) => {
         console.log('Error with login, check logs.', error);
       });
-    };
+  };
 
   const handleSignUpClick = () => {
-    navigate('/signUp');
+    navigate('/signup');
+  };
+
+  const handleBypass = () => {
+    navigate('/mainPage');
   };
 
     return (
@@ -70,6 +72,5 @@ const LoginForm = () => {
     </div>
   );
 };
-
 
 export default LoginForm;
