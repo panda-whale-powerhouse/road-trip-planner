@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { signup } from '../reducers/authSlice';
+import Button from '@mui/material/Button';
+import TextField from '@mui/material/TextField';
 
 const SignUpForm = () => {
   const dispatch = useDispatch();
@@ -29,36 +31,51 @@ const SignUpForm = () => {
       });
   };
 
+  const handleBackToLogin = (e) => {
+    e.preventDefault();
+    navigate('/');
+  }
+
   return (
-    <div>
-      <h2>Sign Up</h2>
-      <form onSubmit={handleSignUp}>
-        <div>
-          <label htmlFor='username'>Username:</label>
-          <input
-            type='text'
-            id='username'
+    <div >
+      <form className='SignUp'>
+      <h1>Sign Up</h1>
+          <TextField
+            className='Input'
+            label='Username'
+            variant="filled"
             value={username}
             onChange={(e) => setUsername(e.target.value)}
-            required
+            required />
+          <TextField
+          marginBottom='15px'
+          className='Input' 
+          label="Password" 
+          variant="filled" 
+          type='password'
+          id='password'
+          placeholder='Password'
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+          required
           />
-        </div>
-        <div>
-          <label htmlFor='password'>Password:</label>
-          <input
-            type='password'
-            id='password'
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            required
-          />
-        </div>
-        <button type='submit'>Sign Up</button>
+      <div>
+      <Button 
+      variant="contained" 
+      sx={{color: '#d6d3ff'}}
+      onClick={handleSignUp}
+      >Sign Up</Button>
+
+      <Button 
+      variant="contained" 
+      sx={{color: '#d6d3ff'}} 
+      onClick={handleBackToLogin}
+      >Back To Login</Button>
+      </div>
+      {usernameTaken && <p>Username has already been taken.</p>}
+      {!fieldsFilled && <p>All fields are required.</p>}
+      {error && <p>Username may already taken, please try again.</p>}
       </form>
-      {usernameTaken && <p>Username is already taken</p>}
-      {!fieldsFilled && <p>Please fill all fields</p>}
-      {error && <p>An error occurred. Please try again.</p>}
-      <Link to='/'>Back to Login</Link>
     </div>
   );
 };

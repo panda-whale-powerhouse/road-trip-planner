@@ -28,7 +28,7 @@ const SavedTrips = ({ tripState, setIsLoggedIn }) => {
 
   return (
     <div style={styles.savedBox}>
-      <h3>Saved Trips:</h3>
+      <h3>Saved Trips</h3>
       <div>{trips}</div>
     </div>
   );

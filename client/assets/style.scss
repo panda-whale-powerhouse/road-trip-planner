@@ -1,7 +1,7 @@
-@media screen and (min-width: 1200px) {
-  .container {
-      width: 100%;
-  }
+.roboto-bold {
+  font-family: "Roboto", sans-serif;
+  font-weight: 700;
+  font-style: normal;
 }
 
 html {
@@ -46,6 +46,22 @@ body {
   align-items: center;
 }
 
+h1 {
+  font-family: 'Roboto';
+}
+
+h3 {
+  font-family: 'Roboto';
+}
+
+ul {
+  font-family: 'Roboto';
+}
+
+p {
+  font-family: 'Roboto';
+}
+
 .Input {
   height: 25px;
   width: 35em;
@@ -67,6 +83,15 @@ button {
   display: flex;
   flex-direction: column;
   justify-content: center;
+  align-items: center;
+}
+
+.SignUp {
+  width: 75em;
+  height: 20em;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
   align-items: center;
 }
 

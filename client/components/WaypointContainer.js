@@ -5,7 +5,7 @@ const WaypointContainer = () => {
   const waypoints = useSelector((state) => state.genSettings.waypoints);
   return (
     <div style={styles.savedBox}>
-      <h3>Waypoint List:</h3>
+      <h3>Waypoint List</h3>
       <ul>
         {waypoints.length === 0 ? 
         (<li>No Waypoints Yet</li>) : (

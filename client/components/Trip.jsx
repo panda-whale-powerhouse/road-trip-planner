@@ -1,4 +1,5 @@
 import React from 'react';
+import Button from '@mui/material/Button';
 import { useSelector, useDispatch } from 'react-redux';
 import {
   updateName,
@@ -23,12 +24,14 @@ const Trip = ({ trip }) => {
   }
 
   return (
-    <button onClick={selectTrip}>
-      <p>{name}</p>
-      <p>
-        {origin} to {destination}
-      </p>
-    </button>
+    <>
+    <Button 
+      variant="contained" 
+      sx={{color: '#d6d3ff'}}
+      onClick={selectTrip}>
+      {name}
+    </Button>
+    </>
   );
 };
 
