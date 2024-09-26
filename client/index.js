@@ -17,6 +17,7 @@ import WaypointContainer from './components/WaypointContainer';
 
 const App = () => {
   const [tripState, setTripState] = useState([]);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   //Thought State would be easier for savedTrips, wound up needing to be accessed in Settings Component AND savedTrips Component, and led to this. Probably could've been handled with Redux
   useEffect(() => {
@@ -32,7 +33,7 @@ const App = () => {
     }
     getData();
     console.log('List O-Trips', tripState);
-  }, []);
+  }, [isLoggedIn]);
 
   console.log('List O-Trips2', tripState);
 
@@ -46,13 +47,17 @@ const App = () => {
             path='/mainPage'
             element={
               <div id='trips'>
-                <SavedTrips id='trips2' tripState={tripState} />
                 <div id='settings'>
                   <Settings setTripState={setTripState} tripState={tripState} />
                   <Map />
-                </div>
-                <div>
-                  <WaypointContainer />
+                  <div id='outputs'>
+                    <SavedTrips
+                      id='trips2'
+                      tripState={tripState}
+                      setIsLoggedIn={setIsLoggedIn}
+                    />
+                    <WaypointContainer />
+                  </div>
                 </div>
               </div>
             }
