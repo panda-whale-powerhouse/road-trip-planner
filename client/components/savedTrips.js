@@ -9,6 +9,7 @@ const SavedTrips = () => {
       try {
         const response = await fetch('roadtrips');
         const data = await response.json();
+        console.log(data);
         setTripState(data);
       } catch (error) {
         console.log('Prob in SavedTrips', error);
