@@ -63,6 +63,7 @@ const LoginForm = () => {
         required
         />
         </div>
+        <Button variant="contained" type='submit'>Login</Button>
       </form>
       <div id='buttonField'>
         <Button variant="contained" type='submit'>Login</Button>

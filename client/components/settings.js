@@ -9,7 +9,7 @@ import {
   updateWaypoints,
 } from '../reducers/genSettingsSlice';
 
-const Settings = () => {
+const Settings = ({setTripState, tripState}) => {
   const name = useSelector((state) => state.genSettings.name);
   const origin = useSelector((state) => state.genSettings.origin);
   const destination = useSelector((state) => state.genSettings.destination);
@@ -97,12 +97,11 @@ const Settings = () => {
     // console.log('Clicked saveTrip');
     const bodyObj = {
       tripData: totalStore,
-      creator: "Alex's Cookie",
+      // creator: "Alex's Cookie",
       roadtripName: name,
     };
     console.log('Post Body here:', bodyObj);
     fetch('/roadtrips', {
-      //I believe this route is causing us issues
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -111,7 +110,11 @@ const Settings = () => {
     })
       .then((response) => response.json())
       .then((data) => {
-        console.log(data, 'newroute response');
+        console.log('tripData', bodyObj.tripData);
+        console.log('bodyObj', bodyObj)
+        console.log('data, I guess', data)
+        setTripState([...tripState, bodyObj]
+        )
       })
       .catch((error) => {
         console.error('Error:', error);
