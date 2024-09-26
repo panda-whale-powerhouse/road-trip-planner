@@ -127,6 +127,7 @@ const Settings = () => {
         <input
           type='text'
           onChange={(e) => dispatch(updateName(e.target.value))}
+          value={name}
         ></input>
         <button type='button' onClick={saveTrip}>
           Save Trip
