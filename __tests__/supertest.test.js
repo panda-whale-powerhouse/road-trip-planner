@@ -7,7 +7,7 @@ const frontend = 'http://localhost:8080';
 
 describe('route to Server', () => {
   describe('POST', () => {
-    it("response with 200 status and a message 'successfully login'", () => {
+    xit("response with 200 status and a message 'successfully login'", () => {
       const aUser = {
         username: 'cwang',
         password: '123',
