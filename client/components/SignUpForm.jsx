@@ -1,49 +1,31 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { signup } from '../reducers/authSlice';
 
 const SignUpForm = () => {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
-  const [isUsernameTaken, setIsUsernameTaken] = useState(false);
+  const [usernameTaken, setUsernameTaken] = useState(false);
   const [fieldsFilled, setFieldsFilled] = useState(true);
-  const [errorMsgShow, setErrorMsgShow] = useState(false);
-  const navigate = useNavigate();
+  const [error, setError] = useState('');
 
   const handleSignUp = (e) => {
     e.preventDefault();
-    setIsUsernameTaken(false);
-    setFieldsFilled(true);
-    setErrorMsgShow(false);
-
-    const formData = { username, password };
-    fetch('/signup', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(formData),
-    })
-      .then((response) => response.json())
-      .then((data) => {
-        console.log(data, 'signup response');
-        if (data.success) {
-          navigate('/');
-        } else {
-          if (data.message === 'User already exists') {
-            setIsUsernameTaken(true);
-          } else if (
-            data.message ===
-            'missing data: cannot find email or password in req.body'
-          ) {
-            setFieldsFilled(false);
-          } else {
-            setErrorMsgShow(true);
-          }
-        }
+    dispatch(signup({ username, password }))
+      .unwrap()
+      .then(() => {
+        setUsername('');
+        setPassword('');
+        setUsernameTaken (false);
+        setFieldsFilled(true);
+        navigate('/mainPage');
       })
-      .catch((error) => {
-        setErrorMsgShow(true);
-        console.error('Error:', error);
+      .catch((err) => {
+        setError(err.message);
       });
   };
 
@@ -73,9 +55,9 @@ const SignUpForm = () => {
         </div>
         <button type='submit'>Sign Up</button>
       </form>
-      {isUsernameTaken && <p>Username is already taken</p>}
+      {usernameTaken && <p>Username is already taken</p>}
       {!fieldsFilled && <p>Please fill all fields</p>}
-      {errorMsgShow && <p>An error occurred. Please try again.</p>}
+      {error && <p>An error occurred. Please try again.</p>}
       <Link to='/'>Back to Login</Link>
     </div>
   );
