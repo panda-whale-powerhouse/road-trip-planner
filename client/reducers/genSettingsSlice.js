@@ -15,7 +15,7 @@ export const genSettingsSlice = createSlice({
   reducers: {
     updateName: (state, newName) => {
       state.name = newName.payload;
-      console.log("Name Updated!", state.name)
+      console.log('Name Updated!', state.name);
     },
 
     updateOrigin: (state, newOrigin) => {
