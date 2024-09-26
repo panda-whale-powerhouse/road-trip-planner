@@ -4,10 +4,11 @@
   "description": "Plan a Road Trip Route Around a Distance/Hour Driving Per Day",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "jest --verbose",
     "start": "concurrently \"cross-env NODE_ENV=development webpack-dev-server\" \"nodemon ./server/server.js\"",
     "build": "cross-env NODE_ENV=production webpack",
-    "jest": "jest --verbose"
+    "jest": "jest --verbose",
+    "frontend-test": "concurrently \"cross-env NODE_ENV=development webpack-dev-server\" \"jest frontendTests\""
   },
   "repository": {
     "type": "git",
@@ -61,6 +62,7 @@
     "dotenv": "^16.4.5",
     "express": "^4.21.0",
     "mongoose": "^8.6.3",
+    "puppeteer": "^23.4.1",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
     "react-redux": "^9.1.2",

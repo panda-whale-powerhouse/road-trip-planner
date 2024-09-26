@@ -5,4 +5,5 @@ module.exports = async (globalConfig) => {
   console.log('server has been closed');
   await mongoose.disconnect();
   console.log('database disconnected');
+  testFrontEnd.stop();
 };
