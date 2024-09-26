@@ -1,12 +1,30 @@
 import React, { useState, useEffect } from 'react';
+import Trip from './Trip.jsx';
 
 const SavedTrips = () => {
+  const [tripState, setTripState] = useState([]);
+
+  useEffect(() => {
+    async function getData() {
+      try {
+        const response = await fetch('roadtrips');
+        const data = await response.json();
+        setTripState(data);
+      } catch (error) {
+        console.log('Prob in SavedTrips', error);
+      }
+    }
+    getData();
+  }, []);
+
+  const trips = tripState.map((tripEl, i) => {
+    return <Trip key={i} trip={tripEl} />;
+  });
+
   return (
     <div style={styles.savedBox}>
       <h3>Saved Trips:</h3>
-      Trip to Texas!
-      <br></br>
-      ...
+      <div>{trips}</div>
     </div>
   );
 };
