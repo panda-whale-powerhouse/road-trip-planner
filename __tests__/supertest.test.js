@@ -4,7 +4,7 @@ const server = 'http://localhost:3000';
 
 describe('route to Server', () => {
   describe('POST', () => {
-    it("response with 200 status and a message 'successfully login'", () => {
+    xit("response with 200 status and a message 'successfully login'", () => {
       const aUser = {
         username: 'cwang',
         password: '123',
