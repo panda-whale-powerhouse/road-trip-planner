@@ -13,13 +13,13 @@ const Trip = ({ trip }) => {
   const { name, destination, origin, step, waypoints, waypointStr } =
     trip.tripData;
 
+  //make call to update reducer to selected tripdata
   function selectTrip() {
     dispatch(updateName(name));
     dispatch(updateOrigin(origin));
     dispatch(updateDestination(destination));
     dispatch(updateStep(step));
     dispatch(updateWaypoints(waypoints));
-    //make call to update reducer to selected tripdata
   }
 
   return (
