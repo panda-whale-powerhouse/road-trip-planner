@@ -25,13 +25,13 @@ const App = () => {
             path='/mainPage'
             element={
               <div id='trips'>
-                <SavedTrips id='trips2' />
                 <div id='settings'>
                   <Settings />
                   <Map />
-                </div>
-                <div>
+                <div id='outputs'>
+                  <SavedTrips id='trips2' />
                   <WaypointContainer />
+                </div>
                 </div>
               </div>
             }

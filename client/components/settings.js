@@ -125,21 +125,27 @@ const Settings = () => {
 
   return (
     <div id='TripDetails'>
-      <form>
+      <form className='Forms'>
         <TextField
+          className='DetailFields'
           id="title" label="Trip Name" variant="standard"
           type='text'
           onChange={(e) => dispatch(updateName(e.target.value))}
           value={name}
         ></TextField>
-        <Button type='Button' onClick={saveTrip}>
+        <Button
+          sx={{color: '#d6d3ff'}}
+          className='settingsButton'
+          variant='contained' 
+          type='Button' 
+          onClick={saveTrip}>
           Save Trip
         </Button>
       </form>
 
-      <form >
-        <label htmlFor='from'></label>
+      <form className='Forms'>
         <TextField
+          className='DetailFields'
           label="Origin" variant="standard"
           id='from'
           type='text'
@@ -147,8 +153,8 @@ const Settings = () => {
           onChange={(e) => dispatch(updateOrigin(e.target.value))}
         ></TextField>
 
-        <label htmlFor='to'></label>
         <TextField
+          className='DetailFields'
           label="Destination" variant="standard"
           id='to'
           type='text'
@@ -157,16 +163,19 @@ const Settings = () => {
         ></TextField>
       </form>
 
-      <form >
-        <label htmlFor='steps'></label>
+      <form className='Forms'>
         <TextField
-          label="Split up by X miles" variant="standard"
+          className='DetailFields'
+          label="Stops" variant="standard"
           id='steps'
           type='number'
           value={step}
           onChange={(e) => dispatch(updateStep(e.target.value))}
         ></TextField>
-        <Button
+        <Button 
+        sx={{color: '#d6d3ff'}}
+          className='settingsButton'
+          variant='contained'
           onClick={(e) => {
             e.preventDefault();
             chunkRoute();
@@ -176,14 +185,18 @@ const Settings = () => {
         </Button>
       </form>
 
-      <form onSubmit={handleChunk}>
-        <label htmlFor='waypoints'></label>
+      <form className='Forms' onSubmit={handleChunk}>
         <TextField
-          id="waypoints" label="Enter additional stops" variant="standard"
+          sx={{height: '3em'}}
+          className='DetailFields'
+          label="Add Destination" 
+          variant="standard"
           type='text'
-          name='waypoints'
         ></TextField>
-        <Button type='submit'>
+        <Button 
+        sx={{color: '#d6d3ff'}}
+          className='settingsButton'
+          variant='contained' type='submit'>
           Add
         </Button>
       </form>

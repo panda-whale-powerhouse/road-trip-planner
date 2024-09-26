@@ -38,7 +38,7 @@ const LoginForm = () => {
 
     return (
     <div id= 'head1'>
-      <img src={logo} alt='logo' width='750w'></img>
+      <img src={logo} alt='logo' width='400w'></img>
     <div id='login'>
       <form id='fields'>
         <div>
