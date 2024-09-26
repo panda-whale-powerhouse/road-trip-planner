@@ -34,7 +34,7 @@ const styles = {
   savedBox: {
     border: '1px solid black',
     width: '300px',
-    height: '530px',
+    height: '300px',
     margin: 'auto 0',
     padding: '10px',
     borderRadius: '5px',

@@ -38,7 +38,7 @@ const LoginForm = () => {
 
     return (
     <div id= 'head1'>
-      <img src={logo} alt='logo' width='750w'></img>
+      <img src={logo} alt='logo' width='400w'></img>
     <div id='login'>
       <form id='fields'>
         <div>
@@ -63,11 +63,10 @@ const LoginForm = () => {
         required
         />
         </div>
-        <Button variant="contained" type='submit'>Login</Button>
       </form>
       <div id='buttonField'>
-        <Button variant="contained" onClick={handleLogin}>Login</Button>
-        <Button variant="contained" onClick={handleSignUpClick}>Sign Up</Button>
+        <Button variant="contained" sx={{color: '#d6d3ff'}}onClick={handleLogin}>Login</Button>
+        <Button variant="contained" sx={{color: '#d6d3ff'}}onClick={handleSignUpClick}>Sign Up</Button>
       </div>
     </div>
     </div>
