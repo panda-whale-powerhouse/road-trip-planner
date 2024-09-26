@@ -34,6 +34,14 @@ module.exports = {
   module: {
     rules: [
       {
+        test: /\.(png|svg|jpg|jpeg|gif)$/i,
+        use: [
+          {
+            loader: 'file-loader',
+          },
+        ]
+      },
+      {
         test: /\.jsx?$/,
         exclude: /node_modules/,
         use: {

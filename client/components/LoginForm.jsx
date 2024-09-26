@@ -5,6 +5,7 @@ import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { login } from '../reducers/authSlice';
 import { useNavigate } from 'react-router-dom';
+import logo from '../assets/logo.png';
 
 
 const LoginForm = () => {
@@ -38,13 +39,13 @@ const LoginForm = () => {
   };
 
     return (
-    <>
-    <h2>Login</h2>
+    <div id= 'head1'>
+      <img src={logo} alt='logo' width='750w'></img>
     <div id='login'>
       <form id='fields' onSubmit={handleLogin}>
         <div>
           <TextField
-            id='filled-basic'
+            className='Input'
             label='Username'
             variant="filled"
             value={username}
@@ -53,7 +54,7 @@ const LoginForm = () => {
         </div>
         <div>
         <TextField 
-        id="filled-basic" 
+        className='Input' 
         label="Password" 
         variant="filled" 
         type='password'
@@ -64,11 +65,13 @@ const LoginForm = () => {
         required
         />
         </div>
-        <Button variant="contained" onClick={handleBypass} type='submit'>BYPASS</Button>
+      </form>
+      <div id='buttonField'>
         <Button variant="contained" type='submit'>Login</Button>
         <Button variant="contained" onClick={handleSignUpClick}>Sign Up</Button>
-      </form>
-    </div></>
+      </div>
+    </div>
+    </div>
   );
 };
 
