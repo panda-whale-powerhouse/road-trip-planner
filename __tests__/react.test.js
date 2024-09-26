@@ -8,8 +8,8 @@ import '@testing-library/jest-dom';
 const mockStore = configureStore([]);
 
 describe('testing React components', () => {
-  describe('render waypoints', () => {
-    it('render waypoints correctly', () => {
+  describe('render in settings.js', () => {
+    it('render trip name', () => {
       const initialState = {
         genSettings: {
           destination: '',
