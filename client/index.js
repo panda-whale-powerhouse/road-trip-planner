@@ -17,7 +17,7 @@ import WaypointContainer from './components/WaypointContainer';
 const App = () => {
   return (
     <div id='background'>
-      <h1>Road Trip Planner</h1>
+      <h1 id='header'>Road Trip Planner</h1>
       <Router>
         <Routes>
           <Route path='/' element={<LoginForm />} />
