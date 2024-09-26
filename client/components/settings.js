@@ -135,6 +135,7 @@ const Settings = ({setTripState, tripState}) => {
           type='text'
           onChange={(e) => dispatch(updateName(e.target.value))}
           value={name}
+          data-testid='origin'
         ></TextField>
         <Button
           sx={{color: '#d6d3ff'}}

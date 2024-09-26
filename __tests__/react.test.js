@@ -8,8 +8,8 @@ import '@testing-library/jest-dom';
 const mockStore = configureStore([]);
 
 describe('testing React components', () => {
-  describe('render waypoints', () => {
-    xit('render waypoints correctly', () => {
+  describe('render in settings.js', () => {
+    it('render trip name', () => {
       const initialState = {
         genSettings: {
           destination: '',
@@ -25,9 +25,9 @@ describe('testing React components', () => {
           <Settings />
         </Provider>
       );
-      const element = screen.getByTestId('waypoints');
+      const element = screen.getByTestId('origin');
       expect(element).toBeInTheDocument();
-      expect(element).toHaveTextContent('Stops You Want to Make:');
+      expect(element).toHaveTextContent('Trip Name');
     });
   });
 });
