@@ -31,18 +31,14 @@ const LoginForm = () => {
     };
 
   const handleSignUpClick = () => {
-    navigate('/mainPage');
-  };
-
-  const handleBypass = () => {
-    navigate('/mainPage');
+    navigate('/signUp');
   };
 
     return (
     <div id= 'head1'>
       <img src={logo} alt='logo' width='750w'></img>
     <div id='login'>
-      <form id='fields' onSubmit={handleLogin}>
+      <form id='fields'>
         <div>
           <TextField
             className='Input'
@@ -67,7 +63,7 @@ const LoginForm = () => {
         </div>
       </form>
       <div id='buttonField'>
-        <Button variant="contained" type='submit'>Login</Button>
+        <Button variant="contained" onClick={handleLogin}>Login</Button>
         <Button variant="contained" onClick={handleSignUpClick}>Sign Up</Button>
       </div>
     </div>
