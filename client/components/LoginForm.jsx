@@ -5,6 +5,7 @@ import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { login } from '../reducers/authSlice';
 import { useNavigate } from 'react-router-dom';
+import logo from '../assets/logo.png';
 
 const LoginForm = () => {
   const dispatch = useDispatch();
@@ -35,46 +36,40 @@ const LoginForm = () => {
     navigate('/mainPage');
   };
 
-  return (
-    <>
-      <h2>Login</h2>
-      <div id='login'>
-        <form id='fields' onSubmit={handleLogin}>
-          <div>
-            <TextField
-              id='filled-basic'
-              label='Username'
-              variant='filled'
-              value={username}
-              onChange={(e) => setUsername(e.target.value)}
-              required
-            />
-          </div>
-          <div>
-            <TextField
-              id='filled-basic'
-              label='Password'
-              variant='filled'
-              type='password'
-              id='password'
-              placeholder='Password'
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              required
-            />
-          </div>
-          <Button variant='contained' onClick={handleBypass} type='submit'>
-            BYPASS
-          </Button>
-          <Button variant='contained' type='submit'>
-            Login
-          </Button>
-          <Button variant='contained' onClick={handleSignUpClick}>
-            Sign Up
-          </Button>
-        </form>
+    return (
+    <div id= 'head1'>
+      <img src={logo} alt='logo' width='750w'></img>
+    <div id='login'>
+      <form id='fields' onSubmit={handleLogin}>
+        <div>
+          <TextField
+            className='Input'
+            label='Username'
+            variant="filled"
+            value={username}
+            onChange={(e) => setUsername(e.target.value)}
+            required />
+        </div>
+        <div>
+        <TextField 
+        className='Input' 
+        label="Password" 
+        variant="filled" 
+        type='password'
+        id='password'
+        placeholder='Password'
+        value={password}
+        onChange={(e) => setPassword(e.target.value)}
+        required
+        />
+        </div>
+      </form>
+      <div id='buttonField'>
+        <Button variant="contained" type='submit'>Login</Button>
+        <Button variant="contained" onClick={handleSignUpClick}>Sign Up</Button>
       </div>
-    </>
+    </div>
+    </div>
   );
 };
 
