@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import Trip from './Trip.jsx';
 
-const SavedTrips = ({tripState}) => {
+const SavedTrips = ({ tripState, setIsLoggedIn }) => {
   // const [tripState, setTripState] = useState([]);
 
   // useEffect(() => {
@@ -17,7 +17,11 @@ const SavedTrips = ({tripState}) => {
   //   }
   //   getData();
   // }, []);
-  console.log('Tripstate', tripState)
+
+  // This is to force useEffect to run in index.js and refresh the list of saved trips to be for the specific user
+  setIsLoggedIn(true);
+
+  console.log('Tripstate', tripState);
   const trips = tripState.map((tripEl, i) => {
     return <Trip key={i} trip={tripEl} />;
   });
