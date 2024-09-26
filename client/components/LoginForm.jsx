@@ -1,7 +1,11 @@
+import Button from '@mui/material/Button';
+import TextField from '@mui/material/TextField';
+import { styled } from '@mui/material/styles';
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { login } from '../reducers/authSlice';
 import { useNavigate } from 'react-router-dom';
+
 
 const LoginForm = () => {
 
@@ -32,35 +36,50 @@ const LoginForm = () => {
   const handleBypass = () => {
     navigate('/mainPage');
   };
+
+  const StyledButton = styled(Button)({
+    root: {
+      textColor: '#a9a9a9',
+      backgroundColor: '#6fa8dc',
+      color: '#6fa8dc',
+      '&:hover': {
+        backgroundColor: '#6fa8dc',
+        color: '#3c52b2',
+    },
+  }});
+
     return (
-      <div id='login'>
-      <h2>Login</h2>
-      <form onSubmit={handleLogin}>
+    <>
+    <h2>Login</h2>
+    <div id='login'>
+      <form id='fields' onSubmit={handleLogin}>
         <div>
-          <label htmlFor='username'>Username:</label>
-          <input
-            type='text'
-            id='username'
+          <TextField
+            id='filled-basic'
+            label='Username'
+            variant="filled"
             value={username}
             onChange={(e) => setUsername(e.target.value)}
-            required
-            />
+            required />
         </div>
         <div>
-          <label htmlFor='password'>Password:</label>
-          <input
-            type='password'
-            id='password'
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            required
-            />
+        <TextField 
+        id="filled-basic" 
+        label="Password" 
+        variant="filled" 
+        type='password'
+        id='password'
+        placeholder='Password'
+        value={password}
+        onChange={(e) => setPassword(e.target.value)}
+        required
+        />
         </div>
-        <button onClick={handleBypass} type='submit'>BYPASS</button>
-        <button type='submit'>Login</button>
+        <Button variant="contained" onClick={handleBypass} type='submit'>BYPASS</Button>
+        <Button variant="contained" type='submit'>Login</Button>
+        <Button variant="contained" onClick={handleSignUpClick}>Sign Up</Button>
       </form>
-      <button onClick={handleSignUpClick}>Sign Up</button>
-    </div>
+    </div></>
   );
 };
 
