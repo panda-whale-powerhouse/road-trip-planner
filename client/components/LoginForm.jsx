@@ -37,17 +37,6 @@ const LoginForm = () => {
     navigate('/mainPage');
   };
 
-  const StyledButton = styled(Button)({
-    root: {
-      textColor: '#a9a9a9',
-      backgroundColor: '#6fa8dc',
-      color: '#6fa8dc',
-      '&:hover': {
-        backgroundColor: '#6fa8dc',
-        color: '#3c52b2',
-    },
-  }});
-
     return (
     <>
     <h2>Login</h2>
