@@ -1,4 +1,6 @@
 import React, { useRef } from 'react';
+import TextField from '@mui/material/TextField';
+import Button from '@mui/material/Button';
 import { useSelector, useDispatch } from 'react-redux';
 import {
   updateName,
@@ -122,87 +124,71 @@ const Settings = () => {
   }
 
   return (
-    <div style={styles.settings}>
-      <form style={styles.top}>
-        <input
+    <div id='TripDetails'>
+      <form>
+        <TextField
+          id="title" label="Trip Name" variant="standard"
           type='text'
           onChange={(e) => dispatch(updateName(e.target.value))}
           value={name}
-        ></input>
-        <button type='button' onClick={saveTrip}>
+        ></TextField>
+        <Button type='Button' onClick={saveTrip}>
           Save Trip
-        </button>
+        </Button>
       </form>
 
-      <form style={styles.top}>
-        <label htmlFor='from'>From:</label>
-        <input
+      <form >
+        <label htmlFor='from'></label>
+        <TextField
+          label="Origin" variant="standard"
           id='from'
           type='text'
           value={origin}
           onChange={(e) => dispatch(updateOrigin(e.target.value))}
-        ></input>
+        ></TextField>
 
-        <label htmlFor='to'>To:</label>
-        <input
+        <label htmlFor='to'></label>
+        <TextField
+          label="Destination" variant="standard"
           id='to'
           type='text'
           value={destination}
           onChange={(e) => dispatch(updateDestination(e.target.value))}
-        ></input>
+        ></TextField>
       </form>
 
-      <form style={styles.bottom}>
-        <label htmlFor='steps'>Chunk Trip By Miles:</label>
-        <input
+      <form >
+        <label htmlFor='steps'></label>
+        <TextField
+          label="Split up by X miles" variant="standard"
           id='steps'
           type='number'
           value={step}
           onChange={(e) => dispatch(updateStep(e.target.value))}
-        ></input>
-        <button
+        ></TextField>
+        <Button
           onClick={(e) => {
             e.preventDefault();
             chunkRoute();
           }}
         >
           Find Stops
-        </button>
+        </Button>
       </form>
 
-      <form style={styles.bottom} onSubmit={handleChunk}>
-        <label htmlFor='waypoints'>Stops You Want to Make:</label>
-        <input
+      <form onSubmit={handleChunk}>
+        <label htmlFor='waypoints'></label>
+        <TextField
+          id="waypoints" label="Enter additional stops" variant="standard"
           type='text'
-          ref={inputRef}
-          id='waypoints'
           name='waypoints'
-        ></input>
-        <button style={styles.addWaypoint} type='submit'>
+        ></TextField>
+        <Button type='submit'>
           Add
-        </button>
+        </Button>
       </form>
     </div>
   );
-};
-
-const styles = {
-  settings: {
-    display: 'flex',
-    justifyContent: 'space-evenly',
-    alignItems: 'flex-start',
-    flexDirection: 'column',
-    position: 'relative',
-    border: '1px solid black',
-  },
-  top: {
-    display: 'flex',
-    gap: '5px',
-  },
-  bottom: {
-    display: 'flex',
-    gap: '5px',
-  },
 };
 
 export default Settings;
