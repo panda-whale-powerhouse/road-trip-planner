@@ -17,7 +17,7 @@ const roadtripSchema = new mongoose.Schema({
     type: Boolean,
     default: false,
   },
-  routeData: {},
+  tripData: {},
 });
 
 const Roadtrip = mongoose.model('Roadtrip', roadtripSchema);

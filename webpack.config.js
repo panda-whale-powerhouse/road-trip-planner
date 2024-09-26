@@ -16,9 +16,10 @@ module.exports = {
       directory: path.resolve(__dirname, './client'),
       publicPath: './',
     },
+      // historyApiFallback: true,
     proxy: [
       {
-        context: ['/corsproxy', '/login', '/signup', '/mainPage'],
+        context: ['/corsproxy', '/login', '/signup', '/roadtrips'],
         target: 'http://localhost:3000',
         // secure: false,
       },
@@ -33,6 +34,14 @@ module.exports = {
   module: {
     rules: [
       {
+        test: /\.(png|svg|jpg|jpeg|gif)$/i,
+        use: [
+          {
+            loader: 'file-loader',
+          },
+        ]
+      },
+      {
         test: /\.jsx?$/,
         exclude: /node_modules/,
         use: {
@@ -41,8 +50,9 @@ module.exports = {
       },
       {
         test: /\.css?$/,
+        test: /\.s[ac]ss$/i,
         exclude: /node_modules/,
-        use: ['style-loader', 'css-loader'],
+        use: ['style-loader', 'css-loader', 'sass-loader'],
       },
     ],
   },
