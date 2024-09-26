@@ -1,8 +1,9 @@
-import React from 'react';
-import "./assets/style.scss"
-import { createRoot } from "react-dom/client";
-import { Provider } from "react-redux";
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import React, { useState, useEffect } from 'react';
+// import React from 'react';
+import './assets/style.scss';
+import { createRoot } from 'react-dom/client';
+import { Provider } from 'react-redux';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { Navigate } from 'react-router-dom';
 
 import { store } from './app/store';
@@ -15,6 +16,26 @@ import SignUpForm from './components/SignUpForm.jsx';
 import WaypointContainer from './components/WaypointContainer';
 
 const App = () => {
+  const [tripState, setTripState] = useState([]);
+
+  //Thought State would be easier for savedTrips, wound up needing to be accessed in Settings Component AND savedTrips Component, and led to this. Probably could've been handled with Redux
+  useEffect(() => {
+    async function getData() {
+      try {
+        const response = await fetch('roadtrips');
+        const data = await response.json();
+        console.log(data);
+        setTripState(data);
+      } catch (error) {
+        console.log('Prob in SavedTrips', error);
+      }
+    }
+    getData();
+    console.log('List O-Trips', tripState);
+  }, []);
+
+  console.log('List O-Trips2', tripState);
+
   return (
     <div>
       <Router>
@@ -26,10 +47,10 @@ const App = () => {
             element={
               <div id='trips'>
                 <div id='settings'>
-                  <Settings />
+                  <Settings setTripState={setTripState} tripState={tripState} />
                   <Map />
                 <div id='outputs'>
-                  <SavedTrips id='trips2' />
+                  <SavedTrips id='trips2' tripState={tripState} />
                   <WaypointContainer />
                 </div>
                 </div>

@@ -1,6 +1,19 @@
-// import regeneratorRuntime from 'regenerator-runtime';
+const Webpack = require('webpack');
+const WebpackDevServer = require('webpack-dev-server');
+const webpackConfig = require('./webpack.config.js');
 
-module.exports = () => { 
-  global.testServer = require('./server/server');
+const compiler = Webpack(webpackConfig);
+const devServerOptions = { ...webpackConfig.devServer, open: true };
+const server = new WebpackDevServer(devServerOptions, compiler);
+
+// const runServer = async () => {
+//   console.log('Starting server...');
+//   await server.start();
+// };
+
+module.exports = async () => { 
+  global.testServer = require('./server/server.js');
+  global.testFrontEnd = server;
+  server.start();
 };
 

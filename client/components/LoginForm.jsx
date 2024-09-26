@@ -65,8 +65,8 @@ const LoginForm = () => {
         </div>
       </form>
       <div id='buttonField'>
-        <Button variant="contained" onClick={handleLogin}>Login</Button>
-        <Button variant="contained" onClick={handleSignUpClick}>Sign Up</Button>
+        <Button variant="contained" sx={{color: '#d6d3ff'}}onClick={handleLogin}>Login</Button>
+        <Button variant="contained" sx={{color: '#d6d3ff'}}onClick={handleSignUpClick}>Sign Up</Button>
       </div>
     </div>
     </div>
