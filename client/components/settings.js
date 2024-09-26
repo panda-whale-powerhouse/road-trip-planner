@@ -134,6 +134,7 @@ const Settings = ({setTripState, tripState}) => {
           type='text'
           onChange={(e) => dispatch(updateName(e.target.value))}
           value={name}
+          data-testid='origin'
         ></TextField>
         <Button type='Button' onClick={saveTrip}>
           Save Trip
